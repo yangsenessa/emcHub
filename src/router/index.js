@@ -38,7 +38,7 @@ const AfterSaleDetail = (resolve) =>
   require(["@/pages/home/orderCenter/AfterSaleDetail"], resolve);
 const ApplyAfterSale = (resolve) =>
   require(["@/pages/home/orderCenter/ApplyAfterSale"], resolve);
-
+const PayDone = (resolve) => require(["@/pages/payment/PayDone"], resolve);
 /*
  * 会员中心
  */
@@ -162,6 +162,11 @@ export default new Router({
       name: "PointMall",
       component: PointMall,
       meta: { title: "积分商城" },
+    },
+    {
+      path: "/payDone", // 支付成功页面
+      name: "PayDone",
+      component: PayDone,
     },
     {
       path: "/nodeSee", // 文章页面

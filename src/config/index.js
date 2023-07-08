@@ -1,13 +1,7 @@
 
 const Cookie = require('js-cookie')
 module.exports = {
-  title:Cookie.get('siteName') || 'lilishop', //配置显示在浏览器标签的title、底部信息、部分信息展示的值
-  icpCard: "", // icp证
-  company: {
-    href: "https://pickmall.cn",
-    name: "北京宏业汇成科技有限公司",
-  }, //公司信息
-  icpMessage: "京ICP备20009696号-1", //icp备案
+  title:Cookie.get('siteName') || 'emchub', //配置显示在浏览器标签的title、底部信息、部分信息展示的值
   /**
    * 高德地图申请链接
    * https://lbs.amap.com/api/javascript-api/guide/abc/prepare
