@@ -11,13 +11,12 @@
         </div>
         <ul class="detail">
           <li>
-              <img
-                @click="goCreate"
-                class="detail-create"
-                src="@/assets/images/Create.png"
-                alt=""
-              />
-              <!-- <span class="nav-item">create</span> -->
+            <img
+              @click="goCreate"
+              class="detail-create"
+              src="@/assets/images/Create.png"
+              alt=""
+            />
           </li>
           <li>
             <img
@@ -30,13 +29,16 @@
           <li>
             <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
           </li>
-          <li style="position: relative;cursor: pointer;" @click="Information">
-            <img
-              src="@/assets/images/Ellipse6.png"
-              class="nav-item nav-d"
-            />
-            <span class="detail-name">d</span>
+          <li>
+            <Button @click="loginVisible = true" class="detail-button">Log in</Button>
           </li>
+          <!--          <li style="position: relative;cursor: pointer;" @click="Information">-->
+          <!--            <img-->
+          <!--              src="@/assets/images/Ellipse6.png"-->
+          <!--              class="nav-item nav-d"-->
+          <!--            />-->
+          <!--            <span class="detail-name">d</span>-->
+          <!--          </li>-->
         </ul>
       </div>
     </div>
@@ -73,6 +75,16 @@
         <div class="box-logout">退出登陆</div>
       </div>
     </Card>
+
+    <Modal  :styles="{top: '20vh'}"  class-name="vertical-center-modal" v-model="loginVisible" draggable :mask="false" :footer-hide="true">
+        <div class="modal-div">
+          <img class="modal-ing1" src="@/assets/images/logo-tittle.png"/>
+          <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
+        </div>
+<!--        <div class="modal-button-bottom">-->
+<!--          <Button>1111</Button>-->
+<!--        </div>-->
+    </Modal>
   </div>
 </template>
 
@@ -91,6 +103,7 @@ export default {
 
   data() {
     return {
+      loginVisible: false,
       userInfo: {}, // 用户信息
       shoppingCart: [], // 购物车
       showInformation: false,
@@ -129,7 +142,7 @@ export default {
     },
   },
   methods: {
-    goCreate(){
+    goCreate() {
       this.$router.push('/Create')
     },
     signOutFun() {
@@ -143,11 +156,11 @@ export default {
         this.$router.push("/login");
       });
     },
-    Information(){
+    Information() {
       this.showInformation = !this.showInformation
     },
-    goUser(){
-     this.$router.push('PayDone');
+    goUser() {
+      this.$router.push('PayDone');
     },
     goUserCenter(path) {
       // 跳转我的订单，我的足迹、收藏等
@@ -472,5 +485,67 @@ export default {
 .nav-frame {
   width: 20px;
   height: 20px;
+}
+
+.detail-button {
+  margin-top: -5px;
+  width: 120px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #834FFC 0%, #E5AEFF 100%);
+  color: #FFF;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+
+/deep/ .ivu-modal-close {
+  display: none;
+}
+.vertical-center-modal{
+    width: 755px;
+    height: 353px;
+    flex-shrink: 0;
+    border-radius: 6px;
+}
+
+
+.modal-div {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 92px;
+
+  .modal-ing1 {
+    width: 57px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .modal-img2 {
+    margin-left: 10px;
+    width: 160px;
+    height: 32px;
+  }
+}
+
+.modal-button-bottom {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//background: #4d9cf1;
+  text-align: center;
+  button {
+    width: 450px;
+    height: 61px;
+    border-radius: 34px;
+    background: linear-gradient(90deg, #834FFC 0%, #E5AEFF 100%);
+  }
 }
 </style>
