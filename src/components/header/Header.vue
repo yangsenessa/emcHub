@@ -1,0 +1,476 @@
+<template>
+  <div>
+    <div class="box">
+      <div class="nav">
+        <div class="nav-div">
+          <img class="nav-img1" src="@/assets/images/logo-tittle.png"/>
+          <img class="nav-img2" src="@/assets/images/EMCHub.png"/>
+          <Input class="nav-input" placeholder="Enter text">
+            <Button slot="append">搜索</Button>
+          </Input>
+        </div>
+        <ul class="detail">
+          <li>
+              <img
+                @click="goCreate"
+                class="detail-create"
+                src="@/assets/images/Create.png"
+                alt=""
+              />
+              <!-- <span class="nav-item">create</span> -->
+          </li>
+          <li>
+            <img
+              class="detail-connect"
+              src="@/assets/images/Connect.png"
+              alt=""
+            />
+            <!-- <span class="nav-item" @click="shopEntry">connect</span> -->
+          </li>
+          <li>
+            <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
+          </li>
+          <li style="position: relative;cursor: pointer;" @click="Information">
+            <img
+              src="@/assets/images/Ellipse6.png"
+              class="nav-item nav-d"
+            />
+            <span class="detail-name">d</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <Card v-if="showInformation" class="box-information">
+      <div class="box-sigle">
+        <div class="box-name">
+          <ul @click="goUser" style="cursor: pointer;">
+            <li style="position: relative">
+              <img
+                src="@/assets/images/Ellipse6.png"
+                class="nav-item nav-d"
+                alt=""
+              />
+              <span class="detail-sigle-name">d</span>
+            </li>
+            <li><span class="box-Wave">WaveWSBS</span></li>
+            <li>
+              <img class="box-Vector"
+                   src="@/assets/images/Vector.png" alt=""/>
+            </li>
+          </ul>
+        </div>
+
+        <div class="box-my">
+          <ul>
+            <li v-for="item in myList" :key="item.id">
+              <div class="box-num">{{ item.num }}</div>
+              <img class="box-img" :src="item.src" alt=""/>
+              <div class="box-tittle">{{ item.tittle }}</div>
+            </li>
+          </ul>
+        </div>
+        <div class="box-records">交易记录</div>
+        <div class="box-logout">退出登陆</div>
+      </div>
+    </Card>
+  </div>
+</template>
+
+<script>
+import storage from "@/plugins/storage.js";
+import {cartGoodsAll} from "@/api/cart.js";
+import {logout} from "@/api/account.js";
+
+export default {
+  name: "M-Header",
+  created() {
+    if (storage.getItem("userInfo")) {
+      this.userInfo = JSON.parse(storage.getItem("userInfo"));
+    }
+  },
+
+  data() {
+    return {
+      userInfo: {}, // 用户信息
+      shoppingCart: [], // 购物车
+      showInformation: false,
+      myList: [
+        {
+          id: 1,
+          num: 12,
+          src: require("@/assets/images/Book.png"),
+          tittle: "我的创作",
+        },
+        {
+          id: 2,
+          num: 12,
+          src: require("@/assets/images/Adduser.png"),
+          tittle: "我的下载",
+        },
+        {
+          id: 3,
+          num: 12,
+          src: require("@/assets/images/Target.png"),
+          tittle: "我的粉丝",
+        },
+        {
+          id: 4,
+          num: 12,
+          src: require("@/assets/images/Storage.png"),
+          tittle: "我的关注",
+        },
+      ],
+    };
+  },
+  computed: {
+    // 购物车商品数量
+    cartNum() {
+      return this.$store.state.cartNum;
+    },
+  },
+  methods: {
+    goCreate(){
+      this.$router.push('/Create')
+    },
+    signOutFun() {
+      // 退出登录
+      logout().then((res) => {
+        storage.removeItem("accessToken");
+        storage.removeItem("refreshToken");
+        storage.removeItem("userInfo");
+        storage.removeItem("cartNum");
+        this.$store.commit("SET_CARTNUM", 0);
+        this.$router.push("/login");
+      });
+    },
+    Information(){
+      this.showInformation = !this.showInformation
+    },
+    goUser(){
+     this.$router.push('PayDone');
+    },
+    goUserCenter(path) {
+      // 跳转我的订单，我的足迹、收藏等
+      if (this.userInfo.username) {
+        this.$router.push({path: path});
+      } else {
+        this.$Modal.confirm({
+          title: "请登录",
+          content: "<p>请登录后执行此操作</p>",
+          okText: "立即登录",
+          cancelText: "继续浏览",
+          onOk: () => {
+            this.$router.push({
+              path: "/login",
+              query: {
+                rePath: this.$router.history.current.path,
+                query: JSON.stringify(this.$router.history.current.query),
+              },
+            });
+          },
+        });
+      }
+    },
+    getCartList() {
+      // 获取购物车列表
+      if (this.userInfo.username) {
+        cartGoodsAll().then((res) => {
+          this.shoppingCart = res.result.skuList;
+          this.$store.commit("SET_CARTNUM", this.shoppingCart.length);
+          this.Cookies.setItem("cartNum", this.shoppingCart.length);
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+.shopping-cart-detail,
+.shopping-cart-text,
+.shopping-cart-info,
+.nav a,
+.location,
+.first,
+.username,
+.shopping-cart-null span {
+}
+
+.box {
+  width: 100%;
+  font-size: 12px !important;
+  border-bottom: 0.45px solid #dadce0;
+  background: #fff;
+  box-shadow: 0px 2px 20px 0px rgba(98, 56, 123, 0.06);
+  //@include background_color($light_white_background_color);
+
+  .box-information {
+    width: 319px;
+    height: 299px;
+  }
+}
+
+.nav {
+  margin: 0 auto;
+  width: 1600px;
+  display: flex;
+  //background: #04ad11;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  // border-bottom: 1px solid;
+
+  .nav-div {
+    display: flex;
+    flex-direction: row;
+
+    .nav-img1 {
+      width: 57px;
+      height: 40px;
+      line-height: 80px;
+    }
+
+    .nav-img2 {
+      width: 160px;
+      height: 32px;
+      margin-left: 11px;
+    }
+
+    p {
+      padding-left: 15px;
+      color: #6c2cfd;
+      font-size: 32px;
+      font-family: Nico Moji;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+    }
+
+    .nav-input {
+      position: relative;
+      margin-left: 30px;
+      width: 540px;
+      height: 43px;
+      flex-shrink: 0;
+      // color: #f3f3f3;
+      /deep/ .ivu-input {
+        //background: #0f1011;
+        //border: 0px;
+        border-radius: 26px 0 0 26px;
+        height: 36px;
+        background: #f3f3f3;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      /deep/ .ivu-input-group-append {
+        border-left: none;
+        border: 0px;
+
+        button {
+          position: absolute;
+          left: 480px;
+          bottom: 13px;
+          z-index: 99;
+          width: 98px;
+          height: 36px;
+          border-radius: 26px;
+          color: #fff;
+          background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
+
+/deep/ .ivu-input-group-append {
+  padding: 0 !important;
+}
+
+.nav ul {
+  list-style: none;
+  height: 36px;
+  margin-top: 22px;
+  margin-bottom: 22px;
+
+  .detail-create {
+    width: 56px;
+    height: 16px;
+  }
+
+  .detail-connect {
+    width: 69px;
+    height: 16px;
+  }
+
+  .detail-line {
+    width: 2px;
+    height: 30px;
+  }
+}
+
+.nav li {
+  float: left;
+  font-size: 12px;
+  line-height: 36px;
+  font-weight: bold;
+}
+
+.nav li:first-child {
+  margin-right: 32px;
+}
+
+.nav li:nth-child(3) {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.nav-item {
+  cursor: pointer;
+  color: #6c2cfd;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.nav-d {
+  // border-left: 1px solid #ccc;
+  width: 36px;
+  height: 36px;
+}
+
+.detail-name {
+  position: absolute;
+  left: 13px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.box-information {
+  position: absolute;
+  top: 87px;
+  right: 145px;
+  width: 319px;
+  height: 299px;
+  z-index: 99999;
+}
+
+.box-sigle {
+  margin: 15px 9px 9px 5px;
+  width: 276px;
+  height: 240px;
+  // background: #e5aeff;
+  .box-name {
+    height: 36px;
+    width: 100%;
+
+    .detail-sigle-name {
+      position: absolute;
+      left: 13px;
+      top: 6px;
+      color: #fff;
+      font-size: 16px;
+    }
+  }
+
+  li {
+    float: left;
+  }
+
+  li:nth-child(2) {
+    margin: 13px 5px 0 12px;
+  }
+
+  .box-Wave {
+    color: #555;
+    font-size: 18px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px;
+  }
+
+  .box-Vector {
+    margin-top: 13px;
+    width: 6px;
+    height: 14px;
+  }
+
+  .box-my {
+    margin: 30px 10px 27px 0px;
+    height: 72px;
+    width: 100%;
+    // background: #dadce0;
+    li {
+      width: 48px;
+      height: 72px;
+    }
+
+    li:nth-child(2) {
+      margin: 0 28px;
+    }
+
+    li:nth-child(3) {
+      margin-right: 28px;
+    }
+
+    .box-num {
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .box-img {
+      margin-left: 6px;
+      width: 39px;
+      height: 39px;
+    }
+
+    .box-tittle {
+      text-align: center;
+      font-size: 12px;
+    }
+  }
+
+  .box-records {
+    height: 36px;
+    margin-bottom: 15px;
+    // background: aqua;
+    border-radius: 26px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 37px;
+    padding-left: 23px;
+    background: linear-gradient(
+        90deg,
+        rgba(131, 79, 252, 0.8) 0%,
+        rgba(229, 174, 255, 0.8) 100%
+    );
+  }
+
+  .box-logout {
+    height: 36px;
+    border-radius: 26px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 37px;
+    padding-left: 23px;
+    background: linear-gradient(
+        90deg,
+        rgba(131, 79, 252, 0.5) 0%,
+        rgba(229, 174, 255, 0.5) 100%
+    );
+  }
+}
+
+.nav-frame {
+  width: 20px;
+  height: 20px;
+}
+</style>
