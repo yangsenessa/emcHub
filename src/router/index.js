@@ -9,86 +9,13 @@ const GoodsList = (resolve) => require(["@/pages/GoodsList"], resolve);
 const GoodsDetail = (resolve) => require(["@/pages/GoodsDetail"], resolve);
 const PointGoodsDetail = (resolve) =>
   require(["@/pages/promotion/PointGoodsDetail"], resolve);
-const ShoppingCart = (resolve) => require(["@/pages/ShoppingCart"], resolve);
-const Cart = (resolve) => require(["@/pages/Cart"], resolve);
 const Create = (resolve) => require(["@/pages/create"], resolve);
 const CreateDetail = (resolve) => require(["@/pages/create/CreateDetail"], resolve);
 const Coupon = (resolve) => require(["@/pages/CouponCenter"], resolve);
 const seckill = (resolve) => require(["@/pages/promotion/seckill"], resolve);
 const nodeSee = (resolve) => require(["@/pages/nodeSee/index"], resolve);
-const PointMall = (resolve) =>
-  require(["@/pages/promotion/PointMall"], resolve);
-
-/*
- * 会员中心
- * 订单列表
- */
-const MyOrder = (resolve) =>
-  require([`@/pages/home/orderCenter/MyOrder`], resolve);
-const OrderDetail = (resolve) =>
-  require([`@/pages/home/orderCenter/OrderDetail`], resolve);
-const MyAddress = (resolve) =>
-  require(["@/pages/home/orderCenter/MyAddress"], resolve);
-const AddAddress = (resolve) =>
-  require(["@/pages/home/orderCenter/AddAddress"], resolve);
-const Complain = (resolve) =>
-  require(["@/pages/home/orderCenter/Complain"], resolve);
-const AfterSale = (resolve) =>
-  require(["@/pages/home/orderCenter/AfterSale"], resolve);
-const AfterSaleDetail = (resolve) =>
-  require(["@/pages/home/orderCenter/AfterSaleDetail"], resolve);
-const ApplyAfterSale = (resolve) =>
-  require(["@/pages/home/orderCenter/ApplyAfterSale"], resolve);
 const PayDone = (resolve) => require(["@/pages/payment/PayDone"], resolve);
-/*
- * 会员中心
- */
-const Profile = (resolve) =>
-  require(["@/pages/home/memberCenter/Profile"], resolve);
-const AccountSafe = (resolve) =>
-  require(["@/pages/home/memberCenter/AccountSafe"], resolve);
-const ModifyPwd = (resolve) =>
-  require(["@/pages/home/memberCenter/ModifyPwd"], resolve);
-const Favorites = (resolve) =>
-  require(["@/pages/home/memberCenter/Favorites"], resolve);
-const Distribution = (resolve) =>
-  require(["@/pages/home/memberCenter/Distribution"], resolve);
-const CommentList = (resolve) =>
-  require(["@/pages/home/memberCenter/CommentList"], resolve); // 评价列表
-const AddEval = (resolve) =>
-  require(["@/pages/home/memberCenter/evaluation/AddEval"], resolve); // 添加评价
-const EvalDetail = (resolve) =>
-  require(["@/pages/home/memberCenter/evaluation/EvalDetail"], resolve);
-const ComplainList = (resolve) =>
-  require(["@/pages/home/memberCenter/ComplainList"], resolve);
-const ComplainDetail = (resolve) =>
-  require(["@/pages/home/memberCenter/ComplainDetail"], resolve);
-const Point = (resolve) =>
-  require(["@/pages/home/memberCenter/Point"], resolve);
-const MsgList = (resolve) =>
-  require(["@/pages/home/memberCenter/memberMsg/MsgList"], resolve);
-const MsgDetail = (resolve) =>
-  require(["@/pages/home/memberCenter/memberMsg/MsgDetail"], resolve);
-
-/*
- * 会员中心
- * 账户中心
- * */
-const Coupons = (resolve) =>
-  require(["@/pages/home/userCenter/Coupons"], resolve);
-const MyTracks = (resolve) =>
-  require(["@/pages/home/userCenter/MyTracks"], resolve);
-const MoneyManagement = (resolve) =>
-  require(["@/pages/home/userCenter/MoneyManagement"], resolve);
-
-const Home = (resolve) => require(["@/pages/user/Home"], resolve);
-
 const Merchant = (resolve) => require(["@/pages/Merchant"], resolve);
-const UserMain = (resolve) => require(["@/pages/home/Main"], resolve);
-
-/**
- * 店铺入驻
- */
 const ShopEntry = (resolve) =>
   require(["@/pages/shopEntry/ShopEntry"], resolve);
 
@@ -135,7 +62,7 @@ export default new Router({
       },
     },
     {
-      path: "/goodsList", // 商品列表
+      path: "/goodsList",
       name: "GoodsList",
       component: GoodsList,
     },
@@ -200,155 +127,6 @@ export default new Router({
       meta: {
         title: "限时秒杀",
       },
-    },
-    {
-      path: "/home", // 主页
-      component: Home,
-      children: [
-        {
-          path: "/",
-          name: "Home",
-          component: UserMain,
-          meta: {
-            title: "会员中心",
-          },
-        },
-        {
-          path: "MyTracks",
-          name: "MyTracks",
-          component: MyTracks,
-          meta: { title: "我的足迹" },
-        },
-        {
-          path: "MoneyManagement",
-          name: "MoneyManagement",
-          component: MoneyManagement,
-        },
-        {
-          path: "Complain",
-          name: "Complain",
-          component: Complain,
-        },
-        {
-          path: "Coupons",
-          name: "Coupons",
-          component: Coupons,
-        },
-        {
-          path: "CommentList",
-          name: "CommentList",
-          component: CommentList,
-          mate: { title: "评价列表" },
-        },
-        {
-          path: "AddEval",
-          name: "AddEval",
-          component: AddEval,
-          mate: { title: "添加评价" },
-        },
-        {
-          path: "EvalDetail",
-          name: "EvalDetail",
-          component: EvalDetail,
-          mate: { title: "评价详情" },
-        },
-        {
-          path: "ComplainList",
-          name: "ComplainList",
-          component: ComplainList,
-        },
-        {
-          path: "ComplainDetail",
-          name: "ComplainDetail",
-          component: ComplainDetail,
-        },
-        {
-          path: "AccountSafe",
-          name: "AccountSafe",
-          component: AccountSafe,
-        },
-        {
-          path: "ModifyPwd",
-          name: "ModifyPwd",
-          component: ModifyPwd,
-        },
-        {
-          path: "Favorites",
-          name: "Favorites",
-          component: Favorites,
-          meta: { title: "我的收藏" },
-        },
-        {
-          path: "Distribution",
-          name: "Distribution",
-          component: Distribution,
-          meta: { title: "分销推荐" },
-        },
-        {
-          path: "Point",
-          name: "Point",
-          component: Point,
-          meta: { title: "我的积分" },
-        },
-        {
-          path: "Profile",
-          name: "Profile",
-          component: Profile,
-        },
-        {
-          path: "AfterSale",
-          name: "AfterSale",
-          component: AfterSale,
-          meta: { title: "售后" },
-        },
-        {
-          path: "ApplyAfterSale",
-          name: "ApplyAfterSale",
-          component: ApplyAfterSale,
-          meta: { title: "申请售后" },
-        },
-        {
-          path: "/home/MyAddress",
-          name: "MyAddress",
-          component: MyAddress,
-          meta: { title: "收货地址" },
-        },
-        {
-          path: "AddAddress",
-          name: "AddAddress",
-          component: AddAddress,
-        },
-        {
-          path: "MsgList",
-          name: "MsgList",
-          component: MsgList,
-          meta: { title: "我的消息" },
-        },
-        {
-          path: "MsgDetail",
-          name: "MsgDetail",
-          component: MsgDetail,
-          meta: { title: "我的消息" },
-        },
-        {
-          path: "MyOrder",
-          name: "MyOrder",
-          component: MyOrder,
-          meta: { title: "我的订单" },
-        },
-        {
-          path: "OrderDetail",
-          name: "OrderDetail",
-          component: OrderDetail,
-          meta: { title: "订单详情" },
-        },
-        {
-          path: "AfterSaleDetail",
-          name: "AfterSaleDetail",
-          component: AfterSaleDetail,
-          meta: { title: "售后详情" },
-        },
-      ],
     },
     {
       path: "/merchant",

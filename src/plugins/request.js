@@ -7,18 +7,17 @@ import store from '../vuex/store';
 import { handleRefreshToken } from '@/api/index';
 
 const qs = require('qs');
-// api地址
-export const buyerUrl =
+export const Url =
   process.env.NODE_ENV === 'development'
-    ? BASE.API_DEV.buyer
-    : BASE.API_PROD.buyer;
+    ? BASE.API_DEV.emchub
+    : BASE.API_PROD.emchub;
 
 // 创建axios实例
-var isRefreshToken = 0;
+let isRefreshToken = 0;
 const refreshToken = getTokenDebounce();
 const service = axios.create({
   timeout: 10000, // 请求超时时间
-  baseURL: buyerUrl, // API
+  baseURL: Url, // API
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
   }),
@@ -48,13 +47,6 @@ service.interceptors.request.use(
     if (process.client && loading !== false) {
       config.loading = Spin.show();
     }
-
-    // let uuid = Storage.getItem('uuid');
-    // if (!uuid) {
-    //   uuid = uuidv4();
-    //   Storage.setItem('uuid', uuid);
-    // }
-    // config.headers['uuid'] = uuid;
 
     // 获取访问Token
     let accessToken = Storage.getItem('accessToken');
