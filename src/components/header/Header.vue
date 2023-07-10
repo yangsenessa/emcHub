@@ -76,14 +76,19 @@
       </div>
     </Card>
 
-    <Modal  :styles="{top: '20vh'}"  class-name="vertical-center-modal" v-model="loginVisible" draggable :mask="false" :footer-hide="true">
+    <Modal  :styles="{top: '20vh'}" width="755px"
+            class-name="vertical-center-modal"
+            v-model="loginVisible" draggable :mask="true" :footer-hide="true">
         <div class="modal-div">
           <img class="modal-ing1" src="@/assets/images/logo-tittle.png"/>
           <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
         </div>
-<!--        <div class="modal-button-bottom">-->
-<!--          <Button>1111</Button>-->
-<!--        </div>-->
+        <div class="modal-button-bottom">
+          <Button>
+            <img src="@/assets/images/emc/google.png" />
+            <span>使用google邮箱登陆</span>
+          </Button>
+        </div>
     </Modal>
   </div>
 </template>
@@ -536,16 +541,33 @@ export default {
 }
 
 .modal-button-bottom {
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//background: #4d9cf1;
   text-align: center;
+  margin-bottom: 92px;
+  margin-top: 60px;
+
   button {
-    width: 450px;
+    width: 656px;
     height: 61px;
     border-radius: 34px;
+    position: relative;
     background: linear-gradient(90deg, #834FFC 0%, #E5AEFF 100%);
+    img{
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: calc(50% - 15px);
+      left: 189px;
+    }
+    span{
+      color: #FFF;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      position: absolute;
+      top: calc(50% - 18px);
+      left: 240px;
+    }
   }
 }
 </style>
