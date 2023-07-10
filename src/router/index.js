@@ -12,6 +12,7 @@ const PointGoodsDetail = (resolve) =>
 const ShoppingCart = (resolve) => require(["@/pages/ShoppingCart"], resolve);
 const Cart = (resolve) => require(["@/pages/Cart"], resolve);
 const Create = (resolve) => require(["@/pages/create"], resolve);
+const CreateDetail = (resolve) => require(["@/pages/create/CreateDetail"], resolve);
 const Coupon = (resolve) => require(["@/pages/CouponCenter"], resolve);
 const seckill = (resolve) => require(["@/pages/promotion/seckill"], resolve);
 const nodeSee = (resolve) => require(["@/pages/nodeSee/index"], resolve);
@@ -151,25 +152,25 @@ export default new Router({
       meta: { title: "积分商品" },
     },
     {
-      path: "/Create", // 支付页面
+      path: "/Create",
       name: "Create",
       component: Create,
       meta: { title: "create" },
     },
 
     {
-      path: "/PointMall",
-      name: "PointMall",
-      component: PointMall,
-      meta: { title: "积分商城" },
+      path: "/CreateDetail",
+      name: " CreateDetail",
+      component:  CreateDetail,
+      meta: { title: 'create-detail' },
     },
     {
-      path: "/payDone", // 支付成功页面
+      path: "/payDone",
       name: "PayDone",
       component: PayDone,
     },
     {
-      path: "/nodeSee", // 文章页面
+      path: "/nodeSee",
       name: "nodeSee",
       component: nodeSee,
       meta: {

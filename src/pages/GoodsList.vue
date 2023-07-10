@@ -28,7 +28,6 @@
     <div style="margin-top: 20px">
       <Row :gutter="16">
         <Col span="12">
-          <!--          @/assets/images/logo2.png-->
           <img src="@/assets/images/emc/image 9.png" class="goods-detail-img"/>
         </Col>
         <Col span="12">

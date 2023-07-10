@@ -6,7 +6,7 @@
       <createContent v-if="tab==='first'"/>
       <div v-if="tab==='two'" class="create-upload">
         <div class="create-upload-div">
-          <img src="@/assets/images/emc/Vector.png" />
+          <img  src="@/assets/images/emc/Vector.png" />
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@ export default {
     };
   },
   mounted() {
-    this.init();
+    // this.init();
   },
   methods: {
     tabClick(){
@@ -107,7 +107,6 @@ export default {
 .create {
   width: 1600px;
   margin: 0 auto;
-  min-height: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
