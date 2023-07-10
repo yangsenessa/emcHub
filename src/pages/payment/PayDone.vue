@@ -186,7 +186,7 @@ export default {
   },
   methods:{
     goDetail(){
-      this.$router.push('PayMent')
+      this.$router.push('CreateDetail')
     }
   }
 };

@@ -129,7 +129,6 @@ export default {
 .create-right {
   max-height: 920px;
   width: 29.5%;
-  height: 100%;
   flex-shrink: 0;
   border-radius: 6px;
   background: #EEE;

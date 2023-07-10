@@ -8,7 +8,7 @@
     <div class="create-content-con">
       <span>未来世界的古怪而异想天开的图像，采用韦斯·安德森 (Wes Anderson) 标志性的对称风格设计，具有高饱和度的色彩。这个世界充满了奇幻和不寻常的建筑，高耸的尖顶和球状的圆顶涂上了明亮的粉红色、绿色和蓝色。建筑物对称布局，在繁华的大都市中营造出一种秩序感和平衡感。天空中充满了飞艇和会飞的汽车，以一种壮观的、迷宫般的模式移动。由 AI 驱动的光滑白色机器人在运送包裹周围盘旋，而由塑料制成的巨大发光海洋生物则在天空中缓慢漂浮。这个乌托邦的色彩丰富而饱和，柔和的粉红色和蓝色与鲜艳的绿色和黄色形成鲜明对比。一切都经过精心安排，一排排整齐的建筑和有序的空中交通就是明证。总的来说，这张照片抓住了韦斯·安德森 (Wes Anderson) 风格的精髓，包括对称和明亮、古怪的设计元素。它是对未来世界的俏皮和异想天开的表现，在那里一切皆有可能，天空是极限。</span>
       <div class="create-content-con-img">
-        <img @click="goCreateDetail" src="@/assets/images/emc/image 9.png" class="goods-detail-img"/>
+        <img src="@/assets/images/emc/image 9.png" class="goods-detail-img"/>
         <img src="@/assets/images/emc/image 9.png" class="goods-detail-img"/>
       </div>
     </div>
@@ -32,9 +32,9 @@
 export default {
   name: "createContent",
   methods:{
-    goCreateDetail(){
-      this.$router.push('/CreateDetail')
-    }
+    // goCreateDetail(){
+    //   this.$router.push('/CreateDetail')
+    // }
   }
 }
 </script>
