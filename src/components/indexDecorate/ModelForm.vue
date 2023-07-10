@@ -89,7 +89,6 @@
               </div>
             </div>
           </div>
-          <!-- <span class="title">{{ i.value }}</span> -->
         </div>
       </div>
     </div>
@@ -360,7 +359,7 @@ export default {
 
   .item {
     position: relative;
-    border: 1px solid #999;
+    border: 0 solid #999;
     margin-bottom: 10px;
     break-inside: avoid;
     img {
@@ -371,6 +370,9 @@ export default {
       display: block;
       margin-left: 5px;
     }
+  }
+  .item:hover{
+    padding: 1px;
   }
 }
 </style>

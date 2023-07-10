@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="create-right">
-      <Form :model="formItem" :label-width="80">
+      <Form :model="formItem" :label-width="60">
         <FormItem label="模式">
           <Select v-model="formItem.input"></Select>
         </FormItem>
@@ -105,7 +105,7 @@ export default {
 
 <style scoped lang="scss">
 .create {
-  width: 1200px;
+  width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
