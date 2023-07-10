@@ -1,5 +1,5 @@
 
-import request, {Method, buyerUrl} from '@/plugins/request.js';
+import request, {Method} from '@/plugins/request.js';
 
 /**
  * 注册
@@ -58,16 +58,6 @@ export function webLogin (type) {
   window.open(`${buyerUrl}/buyer/passport/connect/connect/login/web/${type}`, 'blank');
 }
 
-/**
- * 第三方登录成功 回调接口
- */
-export function loginCallback (uuid) {
-  return request({
-    url: `/buyer/passport/connect/connect/result?state=${uuid}`,
-    method: Method.GET,
-    needToken: false
-  });
-}
 
 /**
  * 忘记密码  验证手机验证码

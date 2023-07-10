@@ -45,16 +45,6 @@
             ></vue-qr>
           </div>
           <div class="drag-area">
-          <!--    等待扫码-->
-          <div v-if="scannerCodeLoginStatus === 0" class="pending-scan">
-            <p>打开手机App/小程序，扫码登录</p>
-          </div>
-          <!--    已经扫码-->
-          <div v-else-if="scannerCodeLoginStatus === 1" class="scanned">
-            <p>扫码成功，等待确认</p>
-          </div>
-
-          <!--    存在session，等待发送给客户端验证-->
           <div v-if="scannerCodeLoginStatus === 2" class="scanned">
             <p>登录成功，正在页面跳转</p>
           </div>
@@ -158,7 +148,7 @@ import * as RegExp from "@/plugins/RegExp.js";
 import { md5 } from "@/plugins/md5.js";
 import * as apiLogin from "@/api/login.js";
 import { sendSms } from "@/api/common.js";
-import { webLogin, loginCallback,sCLogin,getSCLoginCode} from "@/api/login.js";
+import { webLogin,sCLogin,getSCLoginCode} from "@/api/login.js";
 import storage from "@/plugins/storage.js";
 import verify from "@/components/verify";
 import vueQr from "vue-qr";
@@ -417,26 +407,9 @@ export default {
     this.clearQRLoginInfo();
   },
   mounted() {
-    let uuid = this.$route.query.state;
-    if (uuid) {
-      storage.setItem("uuid", uuid);
-      loginCallback(uuid).then((res) => {
-        if (res.success) {
-          this.loginSuccess(res.result.accessToken,res.result.refreshToken);
-        }
-      });
-    }
+
   },
   watch: {
-    scannerCodeLoginFLag(v){
-      if(v){
-        this.createPCLoginSession();
-        console.log("二维码登录");
-      }else{
-        console.log("取消二维码登录");
-        this.clearQRLoginInfo();
-      }
-    },
     type(v) {
       if (v) {
         this.$refs.formInline.resetFields();

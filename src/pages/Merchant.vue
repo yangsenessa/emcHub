@@ -2,38 +2,6 @@
   <div class="model-form">
     <BaseHeader/>
     <div class="model-content">
-      <!-- <img
-        class="model-thematic"
-        src="@/assets/images/ThematicModels.png"
-        alt=""
-      />
-      <div class="model-card">
-        <Row :gutter="16">
-          <Col
-            class="model-card-col"
-            v-for="message in messages"
-            :key="message.id"
-            v-bind:title="message.title"
-            v-bind:desc="message.desc"
-          >
-            <div class="model-card-item" @click="shopEntry">
-              <img class="model-img" :src="message.src" />
-              <div class="model-card-shadow">
-                <div class="model-card-content">
-                  <div>
-                    <div>{{ message.desc }}</div>
-                    <div>{{ message.time }}</div>
-                  </div>
-                  <div>
-                    <div class="model-card-square">3</div>
-                    <div>{{ message.num }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </div> -->
       <ul class="model-waterfall">
         <li>
           <img
@@ -164,7 +132,7 @@ export default {
 <style lang="scss" scoped>
 .model-content {
   margin: 0 auto;
-  width: 1600px;
+  width: 1080px;
   height: 100%;
   background: #fff;
 }
@@ -190,7 +158,7 @@ export default {
 }
 
 .model-card {
-  width: 1600px;
+  width: 1080px;
   height: 357px;
 
   .model-card-col {
@@ -262,7 +230,7 @@ export default {
       color: #fff;
     }
   }
-  
+
 
   li:nth-child(3) {
     margin: 0 16px;
@@ -286,11 +254,11 @@ export default {
   column-gap: 10px;
   // padding: 10px;
   .uploadItem {
-    width: 311px;
+    width: 100%;
     height: 164px;
   }
   .masonry-shadow {
-    width: 311px;
+    width: 100%;
     height: 75px;
     flex-shrink: 0;
     border-radius: 0px 0px 6px 6px;
@@ -339,7 +307,7 @@ export default {
     font-style: normal;
     font-weight: 400;
     margin: 5px;
-    
+
     span:first-child {
       margin-right: 12px;
     }

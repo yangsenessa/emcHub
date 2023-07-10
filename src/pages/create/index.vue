@@ -105,7 +105,7 @@ export default {
 
 <style scoped lang="scss">
 .create {
-  width: 1600px;
+  width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -115,7 +115,7 @@ export default {
 
 .create-left {
   width: 70.5%;
-  height: 93vh;
+  //height: 93vh;
   span {
     color: #555;
     font-family: Roboto;
@@ -127,8 +127,9 @@ export default {
 }
 
 .create-right {
+  max-height: 920px;
   width: 29.5%;
-  //height: 982px;
+  height: 100%;
   flex-shrink: 0;
   border-radius: 6px;
   background: #EEE;
@@ -184,7 +185,7 @@ export default {
 }
 .create-upload-div{
   width: 692px;
-  height: 459px;
+  height: 440px;
   flex-shrink: 0;
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.10);

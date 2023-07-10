@@ -161,7 +161,7 @@ export default {
 
 <style scoped lang="scss">
 .goods-detail {
-  Width: 1434px;
+  Width: 1080px;
   //min-height: 500px;
   margin: 0 auto;
 
@@ -225,7 +225,7 @@ export default {
 
 .goods-detail-img {
   width: 100%;
-  height: 1120px;
+  height: 900px;
 }
 
 .goods-detail-right {

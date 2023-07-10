@@ -194,17 +194,17 @@ export default {
 
 <style scoped lang='scss'>
 .pay-done {
-  width: 1550px;
+  width: 1080px;
   height: 500px;
   // background-color: aqua;
   margin: 0 auto;
   background: #fff;
 
   .pay-user {
-    margin-top: 60px;
+    margin-top: 30px;
     width: 750px;
     height: 61px;
-    // background-color: pink;
+     //background-color: pink;
     display: flex;
     flex-direction: row;
     .pay-one {
@@ -267,7 +267,7 @@ export default {
 }
 
 .pay-tabs {
-  margin-top: 66px;
+  margin-top: 30px;
 }
 
 .model-card {

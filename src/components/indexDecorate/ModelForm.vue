@@ -167,7 +167,7 @@ export default {
 <style lang="scss" scoped>
 .model-content {
   margin: 0 auto;
-  width: 1600px;
+  width: 1080px;
   height: 100%;
   background: #fff;
 }
@@ -193,7 +193,7 @@ export default {
 }
 
 .model-card {
-  width: 1600px;
+  width: 1080px;
   height: 357px;
 
   .model-card-col {
@@ -265,7 +265,7 @@ export default {
       color: #fff;
     }
   }
-  
+
 
   li:nth-child(3) {
     margin: 0 16px;
@@ -289,11 +289,12 @@ export default {
   column-gap: 10px;
   // padding: 10px;
   .uploadItem {
-    width: 311px;
+    width: 100%;
     height: 164px;
+    background: red;
   }
   .masonry-shadow {
-    width: 311px;
+    width: 100%;
     height: 75px;
     flex-shrink: 0;
     border-radius: 0px 0px 6px 6px;
@@ -342,7 +343,7 @@ export default {
     font-style: normal;
     font-weight: 400;
     margin: 5px;
-    
+
     span:first-child {
       margin-right: 12px;
     }

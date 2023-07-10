@@ -74,7 +74,7 @@ export default {
 
 <style scoped lang="scss">
 .create {
-  width: 1600px;
+  width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -82,15 +82,15 @@ export default {
 }
 
 .create-left {
-  width: 70.5%;
+  width: 63%;
   height: 93vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    width: 55%;
-    height: 85%;
+    width: 70%;
+    height: 90%;
     flex-shrink: 0;
     background: #1c2438;
   }
@@ -98,14 +98,14 @@ export default {
 }
 
 .create-right {
-  width: 29.5%;
+  width: 35%;
   padding: 20px;
   background: #EEE;
   margin-top: 20px;
 }
 
 .create-right-upload {
-  width: 424px;
+  width: 98%;
   margin: 10px auto;
   height: 52px;
   flex-shrink: 0;
@@ -135,7 +135,7 @@ export default {
   justify-content: space-between;
 
   button {
-    width: 190px;
+    width: 45%;
     height: 35px;
     flex-shrink: 0;
     border-radius: 26px;

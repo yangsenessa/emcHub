@@ -24,21 +24,20 @@
               src="@/assets/images/Connect.png"
               alt=""
             />
-            <!-- <span class="nav-item" @click="shopEntry">connect</span> -->
           </li>
           <li>
             <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
           </li>
-          <li>
-            <Button @click="loginVisible = true" class="detail-button">Log in</Button>
-          </li>
-          <!--          <li style="position: relative;cursor: pointer;" @click="Information">-->
-          <!--            <img-->
-          <!--              src="@/assets/images/Ellipse6.png"-->
-          <!--              class="nav-item nav-d"-->
-          <!--            />-->
-          <!--            <span class="detail-name">d</span>-->
-          <!--          </li>-->
+<!--          <li>-->
+<!--            <Button @click="loginVisible = true" class="detail-button">Log in</Button>-->
+<!--          </li>-->
+                    <li style="position: relative;cursor: pointer;" @click="Information">
+                      <img
+                        src="@/assets/images/Ellipse6.png"
+                        class="nav-item nav-d"
+                      />
+                      <span class="detail-name">d</span>
+                    </li>
         </ul>
       </div>
     </div>
@@ -230,7 +229,7 @@ export default {
 
 .nav {
   margin: 0 auto;
-  width: 1600px;
+  width: 1080px;
   display: flex;
   //background: #04ad11;
   flex-direction: row;
@@ -267,7 +266,7 @@ export default {
     .nav-input {
       position: relative;
       margin-left: 30px;
-      width: 540px;
+      width: 500px;
       height: 43px;
       flex-shrink: 0;
       // color: #f3f3f3;
@@ -289,7 +288,7 @@ export default {
 
         button {
           position: absolute;
-          left: 480px;
+          right: 0px;
           bottom: 13px;
           z-index: 99;
           width: 98px;
@@ -374,7 +373,7 @@ export default {
 .box-information {
   position: absolute;
   top: 87px;
-  right: 145px;
+  right: 2.5%;
   width: 319px;
   height: 299px;
   z-index: 99999;

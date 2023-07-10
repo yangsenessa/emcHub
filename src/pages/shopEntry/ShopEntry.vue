@@ -79,7 +79,7 @@ export default {
 }
 
 .upload-content {
-  width: 1200px;
+  width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
