@@ -240,11 +240,13 @@ export default {
   .nav-div {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     .nav-img1 {
       width: 57px;
       height: 40px;
-      line-height: 80px;
+      //line-height: 80px;
     }
 
     .nav-img2 {
@@ -269,10 +271,7 @@ export default {
       width: 500px;
       height: 43px;
       flex-shrink: 0;
-      // color: #f3f3f3;
       /deep/ .ivu-input {
-        //background: #0f1011;
-        //border: 0px;
         border-radius: 26px 0 0 26px;
         height: 36px;
         background: #f3f3f3;
@@ -373,7 +372,7 @@ export default {
 .box-information {
   position: absolute;
   top: 87px;
-  right: 2.5%;
+  right: 7.3%;
   width: 319px;
   height: 299px;
   z-index: 99999;
