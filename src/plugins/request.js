@@ -18,6 +18,7 @@ const refreshToken = getTokenDebounce();
 const service = axios.create({
   timeout: 10000, // 请求超时时间
   baseURL: Url, // API
+  withCredentials:true,
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
   }),
@@ -31,6 +32,9 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const { loading } = config;
+    // config.headers['Content-Type'] ='application/json';
+    console.log(config)
+    console.log(JSON.stringify(config.data),8888888)
     // 如果是put/post请求，用qs.stringify序列化参数
     const isPutPost = config.method === 'put' || config.method === 'post';
     const isJson = config.headers['Content-Type'] === 'application/json';
@@ -47,7 +51,6 @@ service.interceptors.request.use(
     if (process.client && loading !== false) {
       config.loading = Spin.show();
     }
-
     // 获取访问Token
     let accessToken = Storage.getItem('accessToken');
     if (accessToken && config.needToken) {

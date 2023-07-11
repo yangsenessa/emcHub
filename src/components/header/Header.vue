@@ -28,16 +28,16 @@
           <li>
             <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
           </li>
-<!--          <li>-->
-<!--            <Button @click="loginVisible = true" class="detail-button">Log in</Button>-->
-<!--          </li>-->
-                    <li style="position: relative;cursor: pointer;" @click="Information">
-                      <img
-                        src="@/assets/images/Ellipse6.png"
-                        class="nav-item nav-d"
-                      />
-                      <span class="detail-name">d</span>
-                    </li>
+          <li>
+            <Button @click="loginVisible = true" class="detail-button">Log in</Button>
+          </li>
+<!--                    <li style="position: relative;cursor: pointer;" @click="Information">-->
+<!--                      <img-->
+<!--                        src="@/assets/images/Ellipse6.png"-->
+<!--                        class="nav-item nav-d"-->
+<!--                      />-->
+<!--                      <span class="detail-name">d</span>-->
+<!--                    </li>-->
         </ul>
       </div>
     </div>
@@ -83,7 +83,7 @@
           <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
         </div>
         <div class="modal-button-bottom">
-          <Button>
+          <Button @click="getLogin">
             <img src="@/assets/images/emc/google.png" />
             <span>使用google邮箱登陆</span>
           </Button>
@@ -94,8 +94,8 @@
 
 <script>
 import storage from "@/plugins/storage.js";
-import {cartGoodsAll} from "@/api/cart.js";
 import {logout} from "@/api/account.js";
+import {Login} from "@/api/login";
 
 export default {
   name: "M-Header",
@@ -146,6 +146,19 @@ export default {
     },
   },
   methods: {
+    // a(){},
+    getLogin(){
+      let params = {
+        "custId":'1111',
+        "bussData":{
+          "identityType": "PASSWD",
+          "authToken": "0xa89981988ba"
+        }
+      }
+      Login(params).then(res=>{
+         console.log(res,333333)
+      })
+    },
     goCreate() {
       this.$router.push('/Create')
     },
@@ -492,7 +505,7 @@ export default {
 
 .detail-button {
   margin-top: -5px;
-  width: 120px;
+  width: 110px;
   height: 36px;
   flex-shrink: 0;
   border-radius: 6px;

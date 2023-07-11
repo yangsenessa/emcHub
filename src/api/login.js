@@ -1,13 +1,12 @@
-
 import request, {Method} from '@/plugins/request.js';
 
 /**
  * 注册
  */
-export function regist (params) {
+export function regist(params) {
   return request({
-    url: '/buyer/passport/member/register',
-    method: Method.POST,
+    url: '/applyRegister.do',
+    method: "POST",
     needToken: false,
     data: params
   });
@@ -16,33 +15,22 @@ export function regist (params) {
 /**
  * 账号密码登录
  */
-export function login (params) {
+export function Login(params) {
   return request({
-    url: '/buyer/passport/member/userLogin',
+    url: '/userLogin.do',
     method: Method.POST,
-    needToken: false,
-    data: params,
-    headers: { 'clientType': 'PC' }
+    data:params,
+    headers: {
+      // 'Content-Type' :'application/json'
+    }
   });
 }
 
-/**
- * 手机号验证码登录
- */
-export function smsLogin (params) {
-  return request({
-    url: '/buyer/passport/member/smsLogin',
-    method: Method.POST,
-    needToken: false,
-    data: params,
-    headers: { 'clientType': 'PC' }
-  });
-}
 
 /**
  * 获取用户信息
  */
-export function getMemberMsg (params) {
+export function getMemberMsg(params) {
   return request({
     url: '/buyer/passport/member',
     method: Method.GET,
@@ -54,7 +42,7 @@ export function getMemberMsg (params) {
 /**
  * 第三方登录 支付宝，微博，qq,微信
  */
-export function webLogin (type) {
+export function webLogin(type) {
   window.open(`${buyerUrl}/buyer/passport/connect/connect/login/web/${type}`, 'blank');
 }
 
@@ -62,10 +50,10 @@ export function webLogin (type) {
 /**
  * 忘记密码  验证手机验证码
  */
-export function validateCode (params) {
+export function validateCode(params) {
   return request({
     url: `/buyer/passport/member/resetByMobile`,
-    method: Method.POST,
+    method: Method.GET,
     needToken: false,
     params
   });
@@ -74,7 +62,7 @@ export function validateCode (params) {
 /**
  * 忘记密码 重置密码
  */
-export function resetPassword (params) {
+export function resetPassword(params) {
   return request({
     url: `/buyer/passport/member/resetPassword`,
     method: Method.POST,
@@ -91,9 +79,10 @@ export function getSCLoginCode(params) {
     params
   });
 }
-export function sCLogin(token,params) {
+
+export function sCLogin(token, params) {
   return request({
-    url: `/buyer/passport/member/session_login/`+token,
+    url: `/buyer/passport/member/session_login/` + token,
     method: Method.POST,
     needToken: false,
     params
