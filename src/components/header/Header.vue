@@ -96,13 +96,11 @@
 import storage from "@/plugins/storage.js";
 import {logout} from "@/api/account.js";
 import {Login} from "@/api/login";
+import {modelUpload} from "../../api/login";
 
 export default {
   name: "M-Header",
   created() {
-    if (storage.getItem("userInfo")) {
-      this.userInfo = JSON.parse(storage.getItem("userInfo"));
-    }
   },
 
   data() {
@@ -140,14 +138,25 @@ export default {
     };
   },
   computed: {
-    // 购物车商品数量
-    cartNum() {
-      return this.$store.state.cartNum;
-    },
   },
   methods: {
     // a(){},
     getLogin(){
+      // let params ={
+      //   modelDetail:{modelId:"b20db117-e130-413a-ae92-059e49839cb9",
+      //     version:"111",
+      //     guideLink:"guideLink",
+      //     paramsGuideLink:"paramsGuideLink",
+      //     sampleCodeLink:"sampleCodeLink"},
+      //   file:'功能.txt',
+      //   userId:'111'
+      // }
+      //
+      // modelUpload(params).then(res=>{
+      //   console.log(res,44444444)
+      // })
+
+
       let params = {
         custId:'1111',
         bussData:{

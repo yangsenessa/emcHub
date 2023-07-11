@@ -3,6 +3,7 @@ import App from "./App";
 import router from "./router";
 import ViewUI from "view-design";
 import "./assets/styles/theme.less";
+
 // import './assets/iconfont/iconfont.css';
 import * as filters from "./plugins/filters";
 import store from "@/vuex/store";

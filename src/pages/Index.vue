@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+<!--    <el-button>1111111</el-button>-->
     <BaseHeader></BaseHeader>
     <model-form></model-form>
   </div>
@@ -8,27 +9,10 @@
 <script>
 import Search from '@/components/Search';
 import ModelForm from '@/components/indexDecorate/ModelForm';
-import storage from "@/plugins/storage";
 export default {
   name: 'Index',
   mounted () {
-    this.getIndexData();
-    let that = this;
-    if(storage.getItem('userInfo')){
-      this.getAutoCoup()
-    }
   },
-  data () {
-    return {
-      autoCoupList:[],
-      showCpmodel:false,
-      modelForm: { list: [] }, // 楼层装修数据
-      topAdvert: {}, // 顶部广告
-    };
-  },
-  // created(){
-
-  // },
   methods: {
 
 

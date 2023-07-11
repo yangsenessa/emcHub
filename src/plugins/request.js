@@ -6,7 +6,6 @@ import router from '../router/index.js';
 import store from '../vuex/store';
 import { handleRefreshToken } from '@/api/index';
 
-
 const qs = require('qs');
 export const Url =
   process.env.NODE_ENV === 'development'
@@ -61,9 +60,9 @@ service.interceptors.request.use(
       let jwtData = JSON.parse(
         decodeURIComponent(escape(window.atob(accessToken.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))))
       );
-      if (jwtData.exp < Math.round(new Date() / 1000)) {
-        refresh(config)
-      }
+      // if (jwtData.exp < Math.round(new Date() / 1000)) {
+        // refresh(config)
+      // }
     }
 
     return config;

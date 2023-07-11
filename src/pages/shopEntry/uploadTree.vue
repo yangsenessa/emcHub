@@ -1,15 +1,25 @@
 <template>
   <div class="model-upload-three">
-    <Upload class="model-upload-three-upload" action="//jsonplaceholder.typicode.com/posts/">
+    <Upload class="model-upload-three-upload"
+            ref="upload"
+            :show-upload-list="false"
+            :on-success="handleSuccess"
+            :format="['jpg','jpeg','png']"
+            :max-size="2048"
+            :on-format-error="handleFormatError"
+            :on-exceeded-size="handleMaxSize"
+            multiple
+            type="drag"
+            action="#">
       <img src="@/assets/images/emc/Vector.png"/>
     </Upload>
     <span class="model-upload-three-span">最多添加5个文件，支持ckpt、pt、safetensors、bin、zip文件</span>
     <span class="model-upload-three-oldUpload">已上传</span>
     <div class="model-upload-three-bottom">
-       <div style="display: flex;flex-direction: row;justify-content: space-between">
-         <span class="span-url">文件名称.zip</span>
-         <Button class="but-del">删除</Button>
-       </div>
+      <div style="display: flex;flex-direction: row;justify-content: space-between">
+        <span class="span-url">文件名称.zip</span>
+        <Button class="but-del">删除</Button>
+      </div>
       <div style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 10px">
         <span class="span-url">文件名称.zip</span>
         <Button class="but-del">删除</Button>
@@ -20,7 +30,36 @@
 
 <script>
 export default {
-  name: "uploadTree.vue"
+  name: "uploadTree.vue",
+  data() {
+    return {
+      uploadAction:''
+    }
+  },
+  methods: {
+    handleRemove (file) {
+      const fileList = this.$refs.upload.fileList;
+      this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+    },
+    handleSuccess (res, file) {
+      console.log(res,file,33333333333)
+      file.url = 'https://file.iviewui.com/images/image-demo-3.jpg';
+      file.name = 'image-demo-3.jpg';
+    },
+    handleFormatError (file) {
+      this.$Notice.warning({
+        title: 'The file format is incorrect',
+        desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+      });
+    },
+    handleMaxSize (file) {
+      this.$Notice.warning({
+        title: 'Exceeding file size limit',
+        desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+      });
+    },
+  }
+
 }
 </script>
 
@@ -66,10 +105,12 @@ export default {
   line-height: 24px;
   margin-top: 20px;
 }
-.model-upload-three-bottom{
+
+.model-upload-three-bottom {
   margin-bottom: 30px;
 }
-.span-url{
+
+.span-url {
   display: block;
   width: 613px;
   height: 36px;
@@ -83,7 +124,8 @@ export default {
   line-height: 36px;
   padding-left: 10px;
 }
-.but-del{
+
+.but-del {
   width: 70px;
   height: 36px;
   margin-left: 5px;
