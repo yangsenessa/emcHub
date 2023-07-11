@@ -6,6 +6,7 @@ import router from '../router/index.js';
 import store from '../vuex/store';
 import { handleRefreshToken } from '@/api/index';
 
+
 const qs = require('qs');
 export const Url =
   process.env.NODE_ENV === 'development'
@@ -15,10 +16,10 @@ export const Url =
 // 创建axios实例
 let isRefreshToken = 0;
 const refreshToken = getTokenDebounce();
+axios.defaults.headers["Content-Type"] = "application/json";
 const service = axios.create({
   timeout: 10000, // 请求超时时间
   baseURL: Url, // API
-  withCredentials:true,
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
   }),
@@ -51,6 +52,7 @@ service.interceptors.request.use(
     if (process.client && loading !== false) {
       config.loading = Spin.show();
     }
+
     // 获取访问Token
     let accessToken = Storage.getItem('accessToken');
     if (accessToken && config.needToken) {

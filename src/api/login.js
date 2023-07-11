@@ -8,7 +8,7 @@ export function regist(params) {
     url: '/applyRegister.do',
     method: "POST",
     needToken: false,
-    data: params
+     params
   });
 }
 
@@ -18,11 +18,8 @@ export function regist(params) {
 export function Login(params) {
   return request({
     url: '/userLogin.do',
-    method: Method.POST,
-    data:params,
-    headers: {
-      // 'Content-Type' :'application/json'
-    }
+    method:'POST',
+    data:params
   });
 }
 
@@ -39,12 +36,12 @@ export function getMemberMsg(params) {
   });
 }
 
-/**
- * 第三方登录 支付宝，微博，qq,微信
- */
-export function webLogin(type) {
-  window.open(`${buyerUrl}/buyer/passport/connect/connect/login/web/${type}`, 'blank');
-}
+// /**
+//  * 第三方登录 支付宝，微博，qq,微信
+//  */
+// export function webLogin(type) {
+//   window.open(`${buyerUrl}/buyer/passport/connect/connect/login/web/${type}`, 'blank');
+// }
 
 
 /**

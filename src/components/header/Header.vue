@@ -149,10 +149,10 @@ export default {
     // a(){},
     getLogin(){
       let params = {
-        "custId":'1111',
-        "bussData":{
-          "identityType": "PASSWD",
-          "authToken": "0xa89981988ba"
+        custId:'1111',
+        bussData:{
+          identityType: "PASSWD",
+          authToken: "0xa89981988ba"
         }
       }
       Login(params).then(res=>{
