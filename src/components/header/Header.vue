@@ -275,7 +275,7 @@ export default {
     .nav-input {
       position: relative;
       margin-left: 30px;
-      width: 500px;
+      width: 430px;
       height: 43px;
       flex-shrink: 0;
       /deep/ .ivu-input {
