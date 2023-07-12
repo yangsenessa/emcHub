@@ -142,21 +142,6 @@ export default {
   methods: {
     // a(){},
     getLogin(){
-      // let params ={
-      //   modelDetail:{modelId:"b20db117-e130-413a-ae92-059e49839cb9",
-      //     version:"111",
-      //     guideLink:"guideLink",
-      //     paramsGuideLink:"paramsGuideLink",
-      //     sampleCodeLink:"sampleCodeLink"},
-      //   file:'功能.txt',
-      //   userId:'111'
-      // }
-      //
-      // modelUpload(params).then(res=>{
-      //   console.log(res,44444444)
-      // })
-
-
       let params = {
         custId:'1111',
         bussData:{

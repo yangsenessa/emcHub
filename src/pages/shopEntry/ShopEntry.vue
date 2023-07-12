@@ -6,18 +6,18 @@
         <span>编辑模板信息</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=1"  src="@/assets/images/emc/Ellipse 8.png"/>
-        <img v-else  src="@/assets/images/emc/Ellipse8.png"/>
+        <img v-if="current>=1" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>编辑版本信息</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=2"  src="@/assets/images/emc/Ellipse 8.png"/>
-        <img v-else  src="@/assets/images/emc/Ellipse8.png"/>
+        <img v-if="current>=2" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>上传模型</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=3"  src="@/assets/images/emc/Ellipse 8.png"/>
-        <img v-else  src="@/assets/images/emc/Ellipse8.png"/>
+        <img v-if="current>=3" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>发布模型</span>
       </div>
       <!--      <Button style="margin-top:16px" type="primary" @click="next">Next step</Button>-->
@@ -27,11 +27,12 @@
     <uploadTree v-if="current===2"/>
     <uploadFour v-if="current===3"/>
     <div class="upload-content-but">
-      <Button class="upload-content-xia" v-if="current!==3"  @click="next">下一步</Button>
+      <Button class="upload-content-xia" v-if="current!==3" @click="next">下一步</Button>
       <Button class="upload-content-xia"
               @click="up"
               v-if="current!==0"
-              style="margin-left: 30px">上一步</Button>
+              style="margin-left: 30px">上一步
+      </Button>
     </div>
   </div>
 </template>
@@ -40,11 +41,13 @@ import uploadFirst from "@/pages/shopEntry/uploadFirst";
 import uploadTwo from "@/pages/shopEntry/uploadTwo";
 import uploadTree from "@/pages/shopEntry/uploadTree";
 import uploadFour from "@/pages/shopEntry/uploadFour";
+import {modelUpload} from "@/api/upload";
 
 export default {
   data() {
     return {
-      current: 0
+      current: 0,
+      file: ''
     }
   },
   components: {
@@ -54,6 +57,10 @@ export default {
     uploadFour
   },
   methods: {
+    getFile(file) {
+      this.file = file
+      console.log(file, 'file')
+    },
     next() {
       if (this.current == 3) {
         this.current = 0;
@@ -61,13 +68,13 @@ export default {
         this.current += 1;
       }
     },
-    up(){
+    up() {
       if (this.current == 0) {
         this.current = 3;
       } else {
         this.current -= 1;
       }
-    }
+
   },
   mounted() {
   },
@@ -110,7 +117,8 @@ export default {
     line-height: 24px;
   }
 }
-.upload-content-but{
+
+.upload-content-but {
   //width: 1200px;
   display: flex;
   flex-direction: row;
@@ -118,7 +126,8 @@ export default {
   align-items: center;
   margin: 0 auto;
 }
-.upload-content-xia{
+
+.upload-content-xia {
   width: 120px;
   height: 36px;
   border-radius: 6px;

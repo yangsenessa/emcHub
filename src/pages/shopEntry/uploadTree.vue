@@ -1,18 +1,16 @@
 <template>
   <div class="model-upload-three">
     <Upload class="model-upload-three-upload"
-            ref="upload"
-            :show-upload-list="false"
-            :on-success="handleSuccess"
-            :format="['jpg','jpeg','png']"
-            :max-size="2048"
-            :on-format-error="handleFormatError"
-            :on-exceeded-size="handleMaxSize"
+            :before-upload="handleUpload"
             multiple
             type="drag"
+            :format="['ckpt','pt','safetensors','bin','zip']"
             action="#">
       <img src="@/assets/images/emc/Vector.png"/>
     </Upload>
+    <div v-if="file !== null">
+      Upload file: {{ file.name }}
+      <Button type="text" @click="uploadModal">{{  'Uploading' }}</Button></div>
     <span class="model-upload-three-span">最多添加5个文件，支持ckpt、pt、safetensors、bin、zip文件</span>
     <span class="model-upload-three-oldUpload">已上传</span>
     <div class="model-upload-three-bottom">
@@ -29,37 +27,37 @@
 </template>
 
 <script>
+import {modelUpload} from "@/api/upload";
+
 export default {
   name: "uploadTree.vue",
   data() {
     return {
-      uploadAction:''
+      file:null,
     }
   },
   methods: {
-    handleRemove (file) {
-      const fileList = this.$refs.upload.fileList;
-      this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+    uploadModal() {
+      let params = {
+        modelDetail: {
+          modelId: "b20db117-e130-413a-ae92-059e49839cb9",
+          version: "111",
+          guideLink: "guideLink",
+          paramsGuideLink: "paramsGuideLink",
+          sampleCodeLink: "sampleCodeLink"
+        },
+        file: this.file,
+        userId: '111'
+      }
+      modelUpload(params).then(res => {
+        console.log(res, 44444444)
+      })
     },
-    handleSuccess (res, file) {
-      console.log(res,file,33333333333)
-      file.url = 'https://file.iviewui.com/images/image-demo-3.jpg';
-      file.name = 'image-demo-3.jpg';
-    },
-    handleFormatError (file) {
-      this.$Notice.warning({
-        title: 'The file format is incorrect',
-        desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
-      });
-    },
-    handleMaxSize (file) {
-      this.$Notice.warning({
-        title: 'Exceeding file size limit',
-        desc: 'File  ' + file.name + ' is too large, no more than 2M.'
-      });
+    handleUpload (file) {
+      this.file=file
+      return false;
     },
   }
-
 }
 </script>
 
