@@ -41,7 +41,7 @@ import uploadFirst from "@/pages/shopEntry/uploadFirst";
 import uploadTwo from "@/pages/shopEntry/uploadTwo";
 import uploadTree from "@/pages/shopEntry/uploadTree";
 import uploadFour from "@/pages/shopEntry/uploadFour";
-import {modelUpload} from "@/api/upload";
+
 
 export default {
   data() {
@@ -75,9 +75,10 @@ export default {
         this.current -= 1;
       }
 
-  },
-  mounted() {
-  },
+    },
+    mounted() {
+    },
+  }
 };
 </script>
 <style lang="scss" scoped>
