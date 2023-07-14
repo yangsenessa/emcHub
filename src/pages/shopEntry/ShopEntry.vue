@@ -2,38 +2,43 @@
   <div class="upload">
     <div class="upload-content">
       <div class="upload-content-item">
-        <img v-if="current>=0" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-if="current >= 0" src="@/assets/images/emc/Ellipse 8.png"/>
         <span>编辑模板信息</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=1" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-if="current >= 1" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>编辑版本信息</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=2" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-if="current >= 2" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>上传模型</span>
       </div>
       <div class="upload-content-item">
-        <img v-if="current>=3" src="@/assets/images/emc/Ellipse 8.png"/>
+        <img v-if="current >= 3" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
         <span>发布模型</span>
       </div>
       <!--      <Button style="margin-top:16px" type="primary" @click="next">Next step</Button>-->
     </div>
-    <uploadFirst v-if="current===0"/>
-    <uploadTwo v-if="current===1"/>
-    <uploadTree v-if="current===2"/>
-    <uploadFour v-if="current===3"/>
-    <div class="upload-content-but">
-      <Button class="upload-content-xia" v-if="current!==3" @click="next">下一步</Button>
-      <Button class="upload-content-xia"
-              @click="up"
-              v-if="current!==0"
-              style="margin-left: 30px">上一步
-      </Button>
-    </div>
+    <uploadFirst
+      v-if="current === 0"
+      :currentAdd="currentAdd"
+      @uploadFirstModelId="uploadFirstModelId"
+    />
+    <uploadTwo v-if="current === 1"
+               :model_id="model_id"
+               :currentSub="currentSub"
+               :currentAdd="currentAdd"
+    />
+    <uploadTree v-if="current === 2"
+                :currentSub="currentSub"
+                :currentAdd="currentAdd"
+    />
+    <uploadFour v-if="current === 3"
+                :currentSub="currentSub"
+    />
   </div>
 </template>
 <script>
@@ -41,49 +46,43 @@ import uploadFirst from "@/pages/shopEntry/uploadFirst";
 import uploadTwo from "@/pages/shopEntry/uploadTwo";
 import uploadTree from "@/pages/shopEntry/uploadTree";
 import uploadFour from "@/pages/shopEntry/uploadFour";
-
+import {addNewModel, modModelDetailInfo} from "@/api/upload.js";
 
 export default {
   data() {
     return {
       current: 0,
-      file: ''
-    }
+      model_id: null,
+    };
   },
   components: {
     uploadFirst,
     uploadTwo,
     uploadTree,
-    uploadFour
+    uploadFour,
   },
   methods: {
-    getFile(file) {
-      this.file = file
-      console.log(file, 'file')
+    uploadFirstModelId(id) {
+      console.log(id,'id')
+      this.model_id = id
     },
-    next() {
-      if (this.current == 3) {
-        this.current = 0;
-      } else {
-        this.current += 1;
-      }
+    currentAdd(num) {
+      this.current += num
     },
-    up() {
-      if (this.current == 0) {
-        this.current = 3;
-      } else {
-        this.current -= 1;
-      }
-
-    },
-    mounted() {
+    currentSub(num) {
+      this.current -= num
     },
   }
-};
+  ,
+  mounted() {
+  }
+  ,
+}
+;
 </script>
 <style lang="scss" scoped>
 .upload {
-  background: #FFF;
+  background: #fff;
 }
 
 .upload-content {
@@ -132,6 +131,6 @@ export default {
   width: 120px;
   height: 36px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #834FFC 0%, #E5AEFF 100%);
+  background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
 }
 </style>

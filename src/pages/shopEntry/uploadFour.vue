@@ -6,7 +6,7 @@
 <!--        <span>上传模型缩略图，不限尺寸</span>-->
       </div>
       <div class="model-uploadFour-right">
-        <Form ref="formValidate"
+        <Form ref="formValidateFour"
               :model="formValidate"
               label-position="top"
               :rules="ruleValidate"
@@ -45,6 +45,9 @@
         <img class="model-uploadFour-img" src="@/assets/images/emc/image 9.png" />
         <Button class="model-uploadFour-img-but">删除</Button>
       </div>
+    </div>
+    <div style="text-align: center" >
+      <Button class="upload-content-xia" @click="up">上一步</Button>
     </div>
   </div>
 </template>
@@ -95,6 +98,14 @@ export default {
       }
     }
   },
+  props:{
+    currentSub: {type: Function, require: true},
+  },
+  methods:{
+    up(){
+      this.currentSub(1)
+    }
+  }
 }
 </script>
 
@@ -233,5 +244,10 @@ export default {
   line-height: 36px;
 }
 
-
+.upload-content-xia {
+  width: 120px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
+}
 </style>

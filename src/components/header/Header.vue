@@ -28,16 +28,16 @@
           <li>
             <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
           </li>
-          <li>
+          <!-- <li>
             <Button @click="loginVisible = true" class="detail-button">Log in</Button>
-          </li>
-<!--                    <li style="position: relative;cursor: pointer;" @click="Information">-->
-<!--                      <img-->
-<!--                        src="@/assets/images/Ellipse6.png"-->
-<!--                        class="nav-item nav-d"-->
-<!--                      />-->
-<!--                      <span class="detail-name">d</span>-->
-<!--                    </li>-->
+          </li> -->
+                   <li style="position: relative;cursor: pointer;" @click="Information">
+                     <img
+                       src="@/assets/images/Ellipse6.png"
+                       class="nav-item nav-d"
+                     />
+                     <span class="detail-name">d</span>
+                   </li>
         </ul>
       </div>
     </div>
@@ -105,43 +105,14 @@ export default {
 
   data() {
     return {
-      loginVisible: false,
-      userInfo: {}, // 用户信息
-      shoppingCart: [], // 购物车
-      showInformation: false,
-      myList: [
-        {
-          id: 1,
-          num: 12,
-          src: require("@/assets/images/Book.png"),
-          tittle: "我的创作",
-        },
-        {
-          id: 2,
-          num: 12,
-          src: require("@/assets/images/Adduser.png"),
-          tittle: "我的下载",
-        },
-        {
-          id: 3,
-          num: 12,
-          src: require("@/assets/images/Target.png"),
-          tittle: "我的粉丝",
-        },
-        {
-          id: 4,
-          num: 12,
-          src: require("@/assets/images/Storage.png"),
-          tittle: "我的关注",
-        },
-      ],
-    };
+    }
   },
   computed: {
   },
   methods: {
     // a(){},
     getLogin(){
+
       let params = {
         custId:'1111',
         bussData:{
@@ -156,54 +127,11 @@ export default {
     goCreate() {
       this.$router.push('/Create')
     },
-    signOutFun() {
-      // 退出登录
-      logout().then((res) => {
-        storage.removeItem("accessToken");
-        storage.removeItem("refreshToken");
-        storage.removeItem("userInfo");
-        storage.removeItem("cartNum");
-        this.$store.commit("SET_CARTNUM", 0);
-        this.$router.push("/login");
-      });
-    },
     Information() {
       this.showInformation = !this.showInformation
     },
     goUser() {
       this.$router.push('PayDone');
-    },
-    goUserCenter(path) {
-      // 跳转我的订单，我的足迹、收藏等
-      if (this.userInfo.username) {
-        this.$router.push({path: path});
-      } else {
-        this.$Modal.confirm({
-          title: "请登录",
-          content: "<p>请登录后执行此操作</p>",
-          okText: "立即登录",
-          cancelText: "继续浏览",
-          onOk: () => {
-            this.$router.push({
-              path: "/login",
-              query: {
-                rePath: this.$router.history.current.path,
-                query: JSON.stringify(this.$router.history.current.query),
-              },
-            });
-          },
-        });
-      }
-    },
-    getCartList() {
-      // 获取购物车列表
-      if (this.userInfo.username) {
-        cartGoodsAll().then((res) => {
-          this.shoppingCart = res.result.skuList;
-          this.$store.commit("SET_CARTNUM", this.shoppingCart.length);
-          this.Cookies.setItem("cartNum", this.shoppingCart.length);
-        });
-      }
     },
   },
 };

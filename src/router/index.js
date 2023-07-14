@@ -20,7 +20,6 @@ const ShopEntry = (resolve) =>
   require(["@/pages/shopEntry/ShopEntry"], resolve);
 
 Vue.use(Router);
-
 /**
  * 解决重复点击菜单会控制台报错bug
  */
@@ -62,8 +61,8 @@ export default new Router({
       },
     },
     {
-      path: "/goodsList",
-      name: "GoodsList",
+      path: "/modelDetail",
+      name: "modelDetail",
       component: GoodsList,
     },
     {
@@ -84,7 +83,6 @@ export default new Router({
       component: Create,
       meta: { title: "create" },
     },
-
     {
       path: "/CreateDetail",
       name: " CreateDetail",
@@ -118,14 +116,6 @@ export default new Router({
       component: Coupon,
       meta: {
         title: "领券中心",
-      },
-    },
-    {
-      path: "/seckill",
-      name: "seckill",
-      component: seckill,
-      meta: {
-        title: "限时秒杀",
       },
     },
     {

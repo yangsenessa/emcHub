@@ -78,14 +78,6 @@ module.exports = {
       }
     }
   },
-  // devServer: {
-  //   port: configs.port,
-  //   host: "0.0.0.0",
-  //   open: true,
-  //   proxy:{
-  //
-  //   }
-  // },
   devServer: {
     proxy: {
       '/mrchaiemc': {

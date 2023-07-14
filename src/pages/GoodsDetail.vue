@@ -56,7 +56,7 @@ import {
   isStoreCollection,
   getGoodsDistribution,
 } from "@/api/member";
-import { getDetailById } from "@/api/shopentry";
+
 import imTalk from '@/components/mixes/talkIm'
 export default {
   name: "GoodsDetail",
@@ -142,13 +142,6 @@ export default {
             }
 
             if (!this.storeMsg) {
-              // 获取店铺信息
-              getDetailById(this.goodsMsg.data.storeId).then((res) => {
-                if (res.success) {
-                  this.storeMsg = res.result;
-
-                }
-              });
             }
           } else {
             this.$Message.error(res.message);

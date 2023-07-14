@@ -14,7 +14,6 @@
             <span>关注23</span>
           </div>
         </div>
-        <Button class="pay-btn" slot="append">搜索</Button>
       </div>
 
       <div class="pay-tabs">

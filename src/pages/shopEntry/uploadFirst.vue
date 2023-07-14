@@ -1,95 +1,174 @@
 <template>
   <div class="upload-first-content">
-    <Form ref="formValidate"
+    <Form ref="formValidateFirst"
           :model="formValidate"
           label-position="top"
           :rules="ruleValidate"
     >
-      <FormItem label="模型名称" prop="name">
-        <Input v-model="formValidate.name"></Input>
+      <FormItem label="ModelName" prop="ModelName">
+        <Input v-model="formValidate.ModelName"></Input>
       </FormItem>
-      <FormItem label="类型" prop="city">
-        <Select v-model="formValidate.city">
+      <FormItem label="ModelSubName" prop="ModelSubName">
+        <Input v-model="formValidate.ModelSubName">
+        </Input>
+      </FormItem>
+      <FormItem   label="Category" prop="cateGory2">
+        <Button closable class="model-uploadFirst-tag"
+             @click="()=>this.formValidate.cateGory2='PERSON'"
+        >PERSON</Button>
+        <Button closable class="model-uploadFirst-tag"
+                @click="()=>this.formValidate.cateGory2='WEDDING'"
+        >WEDDING</Button>
+        <Button closable class="model-uploadFirst-tag"
+                @click="()=>this.formValidate.cateGory2='WOMEN'"
+        >WOMEN</Button>
+        <Select v-model="formValidate.cateGory2"  clearable>
+          <Option v-for="item in categoryList"
+                  :value="item.value"
+                  :key="item.value">{{ item.label }}</Option>
         </Select>
       </FormItem>
-      <FormItem   label="类别" prop="city">
-        <Tag closable class="model-uploadFirst-tag">标签一</Tag>
-        <Tag closable class="model-uploadFirst-tag">标签二</Tag>
-        <Tag closable class="model-uploadFirst-tag">标签二</Tag>
-        <Select style="width: 62%;margin-left: 10px" v-model="formValidate.city"></Select>
+      <FormItem   label="Lable" prop="cateGory1">
+        <template v-for="item in labelList">
+          <Button class="model-uploadFirst-tag"
+                  @click='labelClick(item.value)'
+          >{{item.label}}
+          </Button>
+        </template>
+        <Select v-model="formValidate.cateGory1"  clearable>
+          <Option v-for="item in labelList"
+                  :value="item.value"
+                  :key="item.value">{{ item.label }}</Option>
+        </Select>
       </FormItem>
-      <FormItem label='关于你模型的描述' prop="desc">
-        <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
-               placeholder="Enter something..."></Input>
+      <FormItem label='Model.describe' prop="ModelDescribe">
+        <Input v-model="formValidate.ModelDescribe" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
+               ></Input>
       </FormItem>
-      <FormItem label="关于模型的使用" prop="gender">
-        <div style="display: flex;flex-direction: row">
-          <div class="model-use-daGou"
-            @click="getAgreeShow()"
-            :class="agreeShow ? 'tick' : ' '"
-          ></div>
-          <span class="model-zi">使用时注册出处</span>
-        </div>
-        <div style="display: flex;flex-direction: row;margin-top: 10px">
-          <div class="model-use-daGou"
-               @click="getAgreeShow()"
-               :class="agreeShow ? 'tick' : ' '"
-          ></div>
-          <span class="model-zi">共享此模型的文件</span>
-        </div>
+      <FormItem label="关于模型的使用" prop="ModelUse">
+        <RadioGroup v-model="formValidate.ModelUse" vertical>
+          <Radio label="apple">
+            <span>使用时注册出处</span>
+          </Radio>
+          <Radio label="android">
+            <span>共享此模型的文件</span>
+          </Radio>
+        </RadioGroup>
+<!--        <div v-for="(item,index) in modelUseDetail" :key="index">-->
+<!--          <div style="display: flex;flex-direction: row">-->
+<!--            <div class="model-use-daGou"-->
+<!--                 @click="getAgreeShow()"-->
+<!--                 :class="agreeShow ? 'tick' : ' '"-->
+<!--            ></div>-->
+<!--            <span class="model-zi">{{item}}</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div style="display: flex;flex-direction: row">-->
+<!--          <div class="model-use-daGou"-->
+<!--            @click="getAgreeShow()"-->
+<!--            :class="agreeShow ? 'tick' : ' '"-->
+<!--          ></div>-->
+<!--          <span class="model-zi">使用时注册出处</span>-->
+<!--        </div>-->
+<!--        <div style="display: flex;flex-direction: row;margin-top: 10px">-->
+<!--          <div class="model-use-daGou"-->
+<!--               @click="getAgreeShow()"-->
+<!--               :class="agreeShow ? 'tick' : ' '"-->
+<!--          ></div>-->
+<!--          <span class="model-zi">共享此模型的文件</span>-->
+<!--        </div>-->
+      </FormItem>
+      <FormItem style="text-align: center">
+        <Button  class="upload-content-xia"
+                 @click="handleSubmit('formValidateFirst')">下一步</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
+import {addNewModel} from "@/api/upload";
 export default {
   name: "uploadFirst",
   data() {
     return {
+      modelUseDetail:['1','2'],
       agreeShow: false, // 控制点击
+      agreeShowTwo:true,
       formValidate: {
-        name: '',
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        date: '',
-        time: '',
-        desc: ''
+        ModelName: 'myfirst model',
+        ModelSubName: 'myfirst model',
+        cateGory2: '',
+        cateGory1:'',
+        ModelDescribe:''
       },
+      vertical: 'apple',
       ruleValidate: {
-        name: [
-          {required: true, message: 'The name cannot be empty', trigger: 'blur'}
+        ModelName:[
+          {required: true, message: 'Please select the ModelName', trigger: 'blur'}
         ],
-        mail: [
-          {required: true, message: 'Mailbox cannot be empty', trigger: 'blur'},
-          {type: 'email', message: 'Incorrect email format', trigger: 'blur'}
+        ModelSubName:[
+          {required: true, message: 'Please select the ModelSubName', trigger: 'blur'}
         ],
-        city: [
-          {required: true, message: 'Please select the city', trigger: 'change'}
+        cateGory2: [
+          {required: true, message: 'Please select the cateGory', trigger: 'change'}
         ],
-        gender: [
-          {required: true, message: 'Please select gender', trigger: 'change'}
+        cateGory1: [
+          {required: true, message: 'Please select the Label', trigger: 'change'}
         ],
-        interest: [
-          {required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change'},
-          {type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change'}
-        ],
-        date: [
-          {required: true, type: 'date', message: 'Please select the date', trigger: 'change'}
-        ],
-        time: [
-          {required: true, type: 'string', message: 'Please select time', trigger: 'change'}
-        ],
-        desc: [
-          {required: true, message: 'Please enter a personal introduction', trigger: 'blur'},
-          {type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur'}
-        ]
-      }
+      },
+      categoryList:[
+        {value:'PERSON',label:'PERSON'},
+        {value:'WEDDING',label:'WEDDING'},
+        {value:'WOMEN',label:'WOMEN'},
+      ],
+      labelList:[
+        {value:'CHECKPOINT',label:'Checkpoint'},
+        {value:'LORA',label:'Lora'},
+        {value:'CONTROLNET',label:'Controlnet'},
+        {value:'OTHER',label:'Other'},
+      ]
     }
   },
+  props:{
+    currentAdd: {type: Function, require: true},
+  },
+  watch:{
+  },
   methods: {
+    handleSubmit(name){
+      // this.$emit("uploadFirstModelId", "12345");
+      // let modelInfo = {
+      //   modelName: "myfirst model",
+      //   modelSubName: "myfirst model sub name",
+      //   category1: "LORA"
+      // }
+      this.$refs[name].validate(async(valid) => {
+        if (valid) {
+          let params = {
+            custId: "1111",
+            bussData: {
+              // modelInfo: JSON.stringify(modelInfo)
+              modelInfo: JSON.stringify(this.formValidate)
+            },
+          };
+          const data = await addNewModel(params);
+          if (data['resultCode'] === 'SUCCESS') {
+            this.$emit("uploadFirstModelId", data.bussData.model_id);
+            this.currentAdd(1)
+          }else {
+            this.$Message.error(res['resultCode'])
+          }
+        }
+      })
+      // this.currentAdd(1)
+    },
+    labelClick(value){
+      this.formValidate.cateGory1=value
+    },
+    getAgreeShowTwo(){
+      this.agreeShowTwo = !this.agreeShowTwo;
+    },
     getAgreeShow() {
       this.agreeShow = !this.agreeShow; // 控制点击
     },
@@ -111,7 +190,7 @@ export default {
 /deep/ .ivu-input {
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.10);
-  height: 47px;
+  height: 40px;
 }
 
 /deep/ .ivu-form-item-error-tip {
@@ -143,8 +222,34 @@ export default {
 // 打勾的那个勾
 .tick::after {
   content: " ";
+  background: #4d9cf1;
+  position: absolute;
+  //display: inline-block;
+  width: 20px;
+  height: 12px;
+  border-width: 0 0 2px 2px;
+  //overflow: hidden;
+  //border-color: #2A343D;
+  border-style: solid;
+  -webkit-transform: rotate(-50deg);
+  transform: rotate(-50deg);
+  left: 4px;
+  top: 4px;
+}
+
+// 第二个钩子
+.model-use-daGou1 {
+  width: 29px;
+  height: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.10) !important;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.10);
+}
+.tick1::after {
+  content: " ";
   position: absolute;
   display: inline-block;
+  background: #4d9cf1;
   width: 20px;
   height: 12px;
   border-width: 0 0 2px 2px;
@@ -154,17 +259,9 @@ export default {
   -webkit-transform: rotate(-50deg);
   transform: rotate(-50deg);
   left: 4px;
-  top: 4px;
+  top: 20px;
 }
 
-// 第二个钩子
-.model-use-gou1 {
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  display: flex;
-  flex-direction: row;
-}
 .model-bottom {
   width: 100%;
   margin: 100px auto;
@@ -191,7 +288,6 @@ export default {
   justify-content: space-between;
 }
 .model-tag{
-  background: #04ad11;
 }
 .model-uploadFirst-tag{
   border-radius: 6px;
@@ -212,4 +308,52 @@ export default {
 /deep/ .ivu-tag .ivu-icon-ios-close{
   color:  #FFF;
 }
+
+.upload-content-xia {
+  width: 120px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
+}
+/deep/ .ivu-radio-inner{
+  border-radius: 0px;
+  width: 20px;
+  height: 20px;
+  //background: #FFF;
+}
+/deep/ .ivu-radio-checked .ivu-radio-inner{
+  border-color: #834ffc;
+}
+/deep/.ivu-radio-inner:after{
+   background-color:inherit;
+}
+/deep/ .ivu-radio-inner::after{
+  content: " ";
+  position: absolute;
+  display: inline-block;
+  width: 15px;
+//background-color: rgba(165, 42, 42, 0);
+  background-color: inherit;
+  height: 15px;
+  border-width: 0 0 2px 2px;
+  overflow: hidden;
+  border-color: #834ffc;
+  border-style: solid;
+  -webkit-transform: rotate(-50deg);
+  transform: rotate(-50deg);
+  //opacity: 0;
+}
+
+
+// 下拉框专用
+/deep/ .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.10);
+}
+
+/deep/ .ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.10);
+ }
+
 </style>

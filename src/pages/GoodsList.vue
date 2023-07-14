@@ -13,17 +13,13 @@
       <Tag class="goods-detail-tag">作品标签</Tag>
     </div>
     <div style="margin-top: 20px">
-      <Tag class="goods-detail-v">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
-      <Tag class="goods-detail-v1">v5.0</Tag>
+      <Button
+        style="margin-right: 10px"
+        :class="currentIndex===index?'goods-detail-v':'goods-detail-v1'"
+        @click="tagClick(index)"
+        v-for="(item,index) in banList"
+        :index="index">{{item}}
+      </Button>
     </div>
     <div style="margin-top: 20px">
       <Row :gutter="16">
@@ -66,7 +62,7 @@
           <div style="margin-top: 20px">
             <div class="goods-detail-bottom">
               <div class="goods-detail-bottom-top">
-                <img  src="@/assets/images/emc/Ellipse 4.png"></img>
+                <img src="@/assets/images/emc/Ellipse 4.png"></img>
                 <div class="goods-detail-bottom-top-div">
                   <span>WaveWSBS</span>
                   <p>5个小时前</p>
@@ -74,11 +70,14 @@
               </div>
               <div class="goods-detail-bottom-bottom-div">
                 <span>是否需要任何最小数据集才能使人工智能生成逼真的照片？我使用的数据集有 50 个 img [不同的艺术风格]，但它仍然变成 3d 渲染/2d 图像，不现实。</span>
+               <div class="goods-detail-bottom-bottom-div-love">
+                 <img src="@/assets/images/emc/VectorLove.png"/><span>99</span>
+               </div>
               </div>
             </div>
             <div class="goods-detail-bottom">
               <div class="goods-detail-bottom-top">
-                <img  src="@/assets/images/emc/Ellipse 4.png"></img>
+                <img src="@/assets/images/emc/Ellipse 4.png"></img>
                 <div class="goods-detail-bottom-top-div">
                   <span>WaveWSBS</span>
                   <p>5个小时前</p>
@@ -86,11 +85,14 @@
               </div>
               <div class="goods-detail-bottom-bottom-div">
                 <span>是否需要任何最小数据集才能使人工智能生成逼真的照片？我使用的数据集有 50 个 img [不同的艺术风格]，但它仍然变成 3d 渲染/2d 图像，不现实。</span>
+                <div class="goods-detail-bottom-bottom-div-love">
+                  <img src="@/assets/images/emc/VectorLove.png"/><span>99</span>
+                </div>
               </div>
             </div>
             <div class="goods-detail-bottom">
               <div class="goods-detail-bottom-top">
-                <img  src="@/assets/images/emc/Ellipse 4.png"></img>
+                <img src="@/assets/images/emc/Ellipse 4.png"></img>
                 <div class="goods-detail-bottom-top-div">
                   <span>WaveWSBS</span>
                   <p>5个小时前</p>
@@ -98,11 +100,14 @@
               </div>
               <div class="goods-detail-bottom-bottom-div">
                 <span>是否需要任何最小数据集才能使人工智能生成逼真的照片？我使用的数据集有 50 个 img [不同的艺术风格]，但它仍然变成 3d 渲染/2d 图像，不现实。</span>
+                <div class="goods-detail-bottom-bottom-div-love">
+                  <img src="@/assets/images/emc/VectorLove.png"/><span>99</span>
+                </div>
               </div>
             </div>
             <div class="goods-detail-bottom">
               <div class="goods-detail-bottom-top">
-                <img  src="@/assets/images/emc/Ellipse 4.png"></img>
+                <img src="@/assets/images/emc/Ellipse 4.png"></img>
                 <div class="goods-detail-bottom-top-div">
                   <span>WaveWSBS</span>
                   <p>5个小时前</p>
@@ -110,6 +115,9 @@
               </div>
               <div class="goods-detail-bottom-bottom-div">
                 <span>是否需要任何最小数据集才能使人工智能生成逼真的照片？我使用的数据集有 50 个 img [不同的艺术风格]，但它仍然变成 3d 渲染/2d 图像，不现实。</span>
+                <div class="goods-detail-bottom-bottom-div-love">
+                  <img src="@/assets/images/emc/VectorLove.png"/><span>99</span>
+                </div>
               </div>
             </div>
           </div>
@@ -122,6 +130,7 @@
 </template>
 
 <script>
+
 export default {
   name: "GoodsList",
   beforeRouteEnter(to, from, next) {
@@ -130,30 +139,17 @@ export default {
   },
   data() {
     return {
-      data: [
-        {
-          title: 'This is title 1',
-          description: 'This is description, this is description, this is description.',
-          avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-          content: 'This is the content, this is the content, this is the content, this is the content.'
-        },
-        {
-          title: 'This is title 2',
-          description: 'This is description, this is description, this is description.',
-          avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-          content: 'This is the content, this is the content, this is the content, this is the content.'
-        },
-        {
-          title: 'This is title 3',
-          description: 'This is description, this is description, this is description.',
-          avatar: 'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
-          content: 'This is the content, this is the content, this is the content, this is the content.'
-        }
-      ]
+
+      banList: ['v5.0', 'v5.1', '5.2'],
+      currentIndex: 0,
     };
   },
-  watch: {},
   created() {
+  },
+  methods: {
+    tagClick(index) {
+      this.currentIndex = index
+    }
   },
   components: {},
 };
@@ -162,7 +158,6 @@ export default {
 <style scoped lang="scss">
 .goods-detail {
   Width: 1080px;
-  //min-height: 500px;
   margin: 0 auto;
 
 }
@@ -197,7 +192,7 @@ export default {
 }
 
 .goods-detail-v {
-  width: 60px;
+  min-width: 60px;
   height: 30px;
   text-align: center;
   line-height: 30px;
@@ -354,6 +349,7 @@ export default {
   .goods-detail-bottom-top {
     display: flex;
     flex-direction: row;
+
     img {
       width: 49px;
       height: 49px;
@@ -362,12 +358,14 @@ export default {
       //background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 
     }
-    .goods-detail-bottom-top-div{
+
+    .goods-detail-bottom-top-div {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       margin-left: 10px;
-      span{
+
+      span {
         color: #555;
         font-size: 18px;
         font-family: Roboto;
@@ -375,7 +373,8 @@ export default {
         font-weight: 400;
         line-height: 12px;
       }
-      p{
+
+      p {
         olor: #555;
         font-size: 12px;
         font-family: Roboto;
@@ -387,9 +386,11 @@ export default {
 
   }
 
-  .goods-detail-bottom-bottom-div{
+  .goods-detail-bottom-bottom-div {
     padding: 10px;
-    span{
+    position: relative;
+
+    span {
       color: #000;
       font-size: 14px;
       font-family: Roboto;
@@ -397,7 +398,28 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+    .goods-detail-bottom-bottom-div-love{
+      position: absolute;
+      right: 10px;
+      img{
+        width: 9px;
+        height: 8px;
+        flex-shrink: 0;
+      }
+      span{
+        color: #444;
+        font-family: Roboto;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px; /* 100% */
+      }
+    }
+
   }
 }
 
+.ban-div {
+
+}
 </style>

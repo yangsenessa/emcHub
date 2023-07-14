@@ -1,41 +1,55 @@
 <template>
   <div class="upload-first-content">
-    <Form ref="formValidate"
+    <Form ref="formValidateTwo"
           :model="formValidate"
           label-position="top"
           :rules="ruleValidate"
     >
-      <FormItem label="版本编号" prop="name">
-        <Input v-model="formValidate.name"></Input>
+      <FormItem label="版本编号" prop="version">
+        <Input v-model="formValidate.version"></Input>
       </FormItem>
       <FormItem label="基础类型" prop="city">
         <Select v-model="formValidate.city">
         </Select>
       </FormItem>
-      <FormItem  label="搜索触发词" prop="city">
-        <Input v-model="formValidate.city"/>
-        <!--        <div>-->
-        <!--          <Tag class="model-tag" type="border" closable>标签</Tag>-->
-        <!--          <Tag type="border" closable>标签</Tag>-->
-        <!--          <Tag type="border" closable>标签</Tag>-->
-        <!--        </div>-->
+      <FormItem label="搜索触发词" prop="version">
+        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
+        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
+        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
+        <Input v-model="formValidate.version"/>
       </FormItem>
       <FormItem label='版本说明' prop="desc">
         <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
-               ></Input>
+        ></Input>
+      </FormItem>
+      <FormItem style="display: flex;flex-direction: row;justify-content: center">
+        <Button class="upload-content-xia"
+                @click="handleSubmit('formValidateTwo')"
+        >下一步
+        </Button
+        >
+        <Button
+          class="upload-content-xia"
+          style="margin-left: 30px"
+          @click="up"
+        >上一步
+        </Button
+        >
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
+import {modModelDetailInfo} from "@/api/upload";
+
 export default {
   name: "uploadTwo",
   data() {
     return {
       agreeShow: false, // 控制点击
       formValidate: {
-        name: '',
+        version: "",
         mail: '',
         city: '',
         gender: '',
@@ -45,8 +59,8 @@ export default {
         desc: ''
       },
       ruleValidate: {
-        name: [
-          {required: true, message: 'The name cannot be empty', trigger: 'blur'}
+        version: [
+          {required: true, message: 'The version cannot be empty', trigger: 'blur'}
         ],
         mail: [
           {required: true, message: 'Mailbox cannot be empty', trigger: 'blur'},
@@ -75,7 +89,47 @@ export default {
       }
     }
   },
+  props: {
+    currentAdd: {type: Function, require: true},
+    currentSub: {type: Function, require: true},
+    model_id: {type: String, require: true}
+  },
   methods: {
+    handleSubmit(name) {
+      let modelDetail = {
+        // modelId: "77b35362-8914-420b-8648-51c221857d5d",
+        modelId: this.model_id,
+        version: "0.01",
+        downloadLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
+        guideLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
+        paramsGuideLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
+        sampleCodeLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
+        invokeGuide: "NOTICE:LET ME KNOW before you put this model on commercial usage. My twitter account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f,V3,Coda and V3.5 are recommended,especially CODA for first-time users.Hard to tell how many models used to merge.Check the example images to recognize this model's art styleFor more example images, just take a look at https://pixai.art",
+        negativePromts: "1 corneo_power, bedroom, cute face, detailed body, detailed face, (sharp_teeth:0.8), +_+, pink panties, kids panties, home white t-shirt <lyco:GoodHands-beta2:1.0>",
+        positivePromts: "blurry, ugly, bad anatomy, extra limbs, undersaturated, low resolution, disfigured, deformations, out of frame, amputee, bad proportions, extra limb, missing limbs, distortion, floating limbs, out of frame, poorly drawn face, poorly drawn hands, text, malformed, missing fingers, cropped, wrong colour of clothes, wrong fingers",
+        commonParams: "Steps: 85, Size: 576x1024, Seed: 3172589486, Model: darkSushiMixMix_225D, Sampler: DPM++ SDE Karras, CFG scale: 8, Model hash: cca17b08da, Variation seed: 741382554, Variation seed strength: 0.15",
+      }
+      let params = {
+        "custId": "1111",
+        "bussData": {
+          modelDetail: JSON.stringify(modelDetail)
+        }
+      }
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          modModelDetailInfo(params).then(res => {
+            if (res.resultCode === 'SUCCESS') {
+              this.currentAdd(1)
+            }
+          })
+        }
+      })
+
+      this.currentAdd(1)
+    },
+    up() {
+      this.currentSub(1)
+    },
     getAgreeShow() {
       this.agreeShow = !this.agreeShow; // 控制点击
     },
@@ -90,6 +144,7 @@ export default {
   margin: 0 auto;
   margin-top: 40px;
 }
+
 /deep/ .ivu-form-item-error .ivu-input {
   border: 1px solid #BF61F9;
 }
@@ -116,14 +171,16 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.model-use-daGou{
+
+.model-use-daGou {
   width: 29px;
   height: 28px;
   border: 1px solid rgba(0, 0, 0, 0.10) !important;
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.10);
 }
-.model-zi{
+
+.model-zi {
   color: #333;
   font-family: Montserrat;
   font-size: 14px;
@@ -158,13 +215,15 @@ export default {
   display: flex;
   flex-direction: row;
 }
+
 .model-bottom {
   width: 100%;
   margin: 100px auto;
   display: flex;
   justify-content: center;
 }
-.model-button{
+
+.model-button {
   width: 120px;
   height: 36px;
   border-radius: 6px;
@@ -178,12 +237,29 @@ export default {
 }
 
 //类别
-.model-lei-bie{
+.model-lei-bie {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.model-tag{
+
+.model-tag {
   background: #04ad11;
+}
+
+.model-uploadFirst-tag {
+  border-radius: 6px;
+  background: #BF61F9;
+  width: 80px;
+  height: 36px;
+  line-height: 36px;
+  flex-shrink: 0;
+}
+
+.upload-content-xia {
+  width: 120px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
 }
 </style>

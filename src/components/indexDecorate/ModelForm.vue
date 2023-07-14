@@ -10,22 +10,21 @@
         <Row :gutter="16">
           <Col
             class="model-card-col"
-            v-for="message in messages"
-            :key="message.id"
-            v-bind:title="message.title"
-            v-bind:desc="message.desc"
+            v-for="model in messages"
+            :key="model.modelId"
           >
-            <div class="model-card-item" @click="shopEntry">
-              <img class="model-img" :src="message.src" />
+            <div class="model-card-item" @click="shopEntry(model.modelId)">
+              <img class="model-img" :src="model.src"/>
               <div class="model-card-shadow">
                 <div class="model-card-content">
                   <div>
-                    <div>{{ message.desc }}</div>
-                    <div>{{ message.time }}</div>
+<!--                    <div>{{ model.modelName }}</div>-->
+                    <div>{{model.desc}}</div>
+                    <div>{{model.time}}</div>
                   </div>
                   <div>
-                    <div class="model-card-square">3</div>
-                    <div>{{ message.num }}</div>
+                    <img class="model-card-square" src="@/assets/images/emc/Vector1.png"/>
+                    <div>1343</div>
                   </div>
                 </div>
               </div>
@@ -41,7 +40,7 @@
             alt=""
           />
         </li>
-         <li>
+        <li>
           <Button slot="append" class="check" @click="goSubject">全部</Button>
         </li>
         <li>
@@ -67,7 +66,7 @@
           @click="goUpload"
         />
         <div class="item" :key="i.id" v-for="i in data">
-          <img :src="i.img" />
+          <img :src="i.img"/>
           <div class="masonry-shadow">
             <div class="masonry-name">Mechanical fish</div>
             <div class="masonry-flex">
@@ -92,17 +91,16 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
-import ModelFormItem from "./ModelFormItem.vue";
 import data from "./data.json";
+import {queryModelInfoForMainView} from "@/api";
 
 export default {
   name: "modelForm",
-  components: {
-    ModelFormItem,
-  },
+  components: {},
   data() {
     return {
       data,
@@ -150,18 +148,22 @@ export default {
       ],
     };
   },
-  methods: {
-    shopEntry() {
-      this.$router.push("goodsList");
-    },
-    goUpload() {
-      this.$router.push("shopEntry");
-    },
-    goSubject(){
-       this.$router.push("Merchant");
-    }
+  created() {
   },
-};
+  methods: {
+  shopEntry(id) {
+    this.$router.push("modelDetail");
+  },
+  goUpload() {
+    this.$router.push("shopEntry");
+  },
+  goSubject() {
+    this.$router.push("Merchant");
+  },
+}
+,
+}
+;
 </script>
 <style lang="scss" scoped>
 .model-content {
@@ -170,18 +172,9 @@ export default {
   height: 100%;
   background: #fff;
 }
-
-// .model-title {
-//   margin-top: 20px;
-//   color: #333333;
-//   font-size: 24px;
-//   font-family: Montserrat;
-//   font-style: normal;
-//   font-weight: 500;
-//   line-height: 24px;
-// }
 .model-form {
   height: 100%;
+  position: relative;
 }
 
 .model-thematic {
@@ -234,6 +227,7 @@ export default {
     }
   }
 }
+
 .model-card-item:hover {
   padding: 1px;
 }
@@ -273,6 +267,7 @@ export default {
   li:nth-child(4) {
     margin-right: 16px;
   }
+
   li:nth-child(5) {
     margin-right: 16px;
   }
@@ -292,6 +287,7 @@ export default {
     height: 164px;
     background: red;
   }
+
   .masonry-shadow {
     width: 100%;
     height: 75px;
@@ -302,6 +298,7 @@ export default {
     position: absolute;
     bottom: 0;
     left: 0;
+
     .masonry-name {
       margin-top: 10px;
       margin-left: 16px;
@@ -312,9 +309,11 @@ export default {
       font-weight: 400;
       line-height: 20px;
     }
+
     .masonry-img {
       margin-top: 15px;
       margin-left: 16px;
+
       span {
         color: #f7f7f7;
         font-family: Roboto;
@@ -324,16 +323,19 @@ export default {
         line-height: 12px;
       }
     }
+
     .masonry-ell {
       width: 20px;
       height: 20px;
       margin-right: 4px;
     }
   }
+
   .masonry-flex {
     display: flex;
     justify-content: space-between;
   }
+
   .masonry-num {
     line-height: 45px;
     color: #f7f7f7;
@@ -351,6 +353,7 @@ export default {
       width: 11px;
       height: 9px;
     }
+
     .Vector2 {
       width: 9px;
       height: 8px;
@@ -362,16 +365,19 @@ export default {
     border: 0 solid #999;
     margin-bottom: 10px;
     break-inside: avoid;
+
     img {
       width: 100%;
       vertical-align: middle;
     }
+
     .title {
       display: block;
       margin-left: 5px;
     }
   }
-  .item:hover{
+
+  .item:hover {
     padding: 1px;
   }
 }

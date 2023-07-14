@@ -1,5 +1,18 @@
 <template>
   <div class="model-upload-three">
+    <!--    <Upload class="model-upload-three-upload"-->
+    <!--            ref="upload"-->
+    <!--            :show-upload-list="false"-->
+    <!--            :on-success="handleSuccess"-->
+    <!--            :format="['jpg','jpeg','png']"-->
+    <!--            :max-size="2048"-->
+    <!--            :on-format-error="handleFormatError"-->
+    <!--            :on-exceeded-size="handleMaxSize"-->
+    <!--            multiple-->
+    <!--            type="drag"-->
+    <!--            action="#">-->
+    <!--      <img src="@/assets/images/emc/Vector.png"/>-->
+    <!--    </Upload>-->
     <Upload class="model-upload-three-upload"
             :before-upload="handleUpload"
             multiple
@@ -10,7 +23,7 @@
     </Upload>
     <div v-if="file !== null">
       Upload file: {{ file.name }}
-      <Button type="text" @click="uploadModal">{{  'Uploading' }}</Button></div>
+    </div>
     <span class="model-upload-three-span">最多添加5个文件，支持ckpt、pt、safetensors、bin、zip文件</span>
     <span class="model-upload-three-oldUpload">已上传</span>
     <div class="model-upload-three-bottom">
@@ -23,6 +36,20 @@
         <Button class="but-del">删除</Button>
       </div>
     </div>
+    <div style="display: flex;flex-direction: row;justify-content: center">
+      <Button class="upload-content-xia"
+              @click="handleSubmit"
+      >下一步
+      </Button
+      >
+      <Button
+        class="upload-content-xia"
+        style="margin-left: 30px"
+        @click="up"
+      >上一步
+      </Button
+      >
+    </div>
   </div>
 </template>
 
@@ -33,11 +60,17 @@ export default {
   name: "uploadTree.vue",
   data() {
     return {
-      file:null,
+      uploadAction: '',
+      file: null
     }
   },
+  props: {
+    currentAdd: {type: Function, require: true},
+    currentSub: {type: Function, require: true},
+    // model_id: {type: String, require: true}
+  },
   methods: {
-    uploadModal() {
+    handleSubmit() {
       let params = {
         modelDetail: {
           modelId: "b20db117-e130-413a-ae92-059e49839cb9",
@@ -51,13 +84,19 @@ export default {
       }
       modelUpload(params).then(res => {
         console.log(res, 44444444)
+        // if(res)
       })
+      this.currentAdd(1)
     },
-    handleUpload (file) {
-      this.file=file
+    up(){
+      this.currentSub(1)
+    },
+    handleUpload(file) {
+      this.file = file
       return false;
     },
   }
+
 }
 </script>
 
@@ -135,5 +174,12 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 36px;
+}
+
+.upload-content-xia {
+  width: 120px;
+  height: 36px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #834ffc 0%, #e5aeff 100%);
 }
 </style>
