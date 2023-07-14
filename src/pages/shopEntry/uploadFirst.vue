@@ -96,8 +96,8 @@ export default {
       agreeShow: false, // 控制点击
       agreeShowTwo:true,
       formValidate: {
-        ModelName: 'myfirst model',
-        ModelSubName: 'myfirst model',
+        ModelName: '',
+        ModelSubName: '',
         cateGory2: '',
         cateGory1:'',
         ModelDescribe:''
@@ -178,7 +178,6 @@ export default {
 
 <style scoped lang="scss">
 .upload-first-content {
-  //background: #4d9cf1;
   width: 692px;
   margin: 0 auto;
   margin-top: 40px;
@@ -341,7 +340,6 @@ export default {
   border-style: solid;
   -webkit-transform: rotate(-50deg);
   transform: rotate(-50deg);
-  //opacity: 0;
 }
 
 

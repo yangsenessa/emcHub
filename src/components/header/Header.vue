@@ -31,13 +31,13 @@
           <!-- <li>
             <Button @click="loginVisible = true" class="detail-button">Log in</Button>
           </li> -->
-                   <li style="position: relative;cursor: pointer;" @click="Information">
-                     <img
-                       src="@/assets/images/Ellipse6.png"
-                       class="nav-item nav-d"
-                     />
-                     <span class="detail-name">d</span>
-                   </li>
+          <li style="position: relative;cursor: pointer;" @click="Information">
+            <img
+              src="@/assets/images/Ellipse6.png"
+              class="nav-item nav-d"
+            />
+            <span class="detail-name">d</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -78,16 +78,16 @@
     <Modal  :styles="{top: '20vh'}" width="755px"
             class-name="vertical-center-modal"
             v-model="loginVisible" draggable :mask="true" :footer-hide="true">
-        <div class="modal-div">
-          <img class="modal-ing1" src="@/assets/images/logo-tittle.png"/>
-          <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
-        </div>
-        <div class="modal-button-bottom">
-          <Button @click="getLogin">
-            <img src="@/assets/images/emc/google.png" />
-            <span>使用google邮箱登陆</span>
-          </Button>
-        </div>
+      <div class="modal-div">
+        <img class="modal-ing1" src="@/assets/images/logo-tittle.png"/>
+        <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
+      </div>
+      <div class="modal-button-bottom">
+        <Button @click="getLogin">
+          <img src="@/assets/images/emc/google.png" />
+          <span>使用google邮箱登陆</span>
+        </Button>
+      </div>
     </Modal>
   </div>
 </template>
@@ -105,25 +105,41 @@ export default {
 
   data() {
     return {
-    }
+      loginVisible: false,
+      userInfo: {}, // 用户信息
+      shoppingCart: [], // 购物车
+      showInformation: false,
+      myList: [
+        {
+          id: 1,
+          num: 12,
+          src: require("@/assets/images/Book.png"),
+          tittle: "我的创作",
+        },
+        {
+          id: 2,
+          num: 12,
+          src: require("@/assets/images/Adduser.png"),
+          tittle: "我的下载",
+        },
+        {
+          id: 3,
+          num: 12,
+          src: require("@/assets/images/Target.png"),
+          tittle: "我的粉丝",
+        },
+        {
+          id: 4,
+          num: 12,
+          src: require("@/assets/images/Storage.png"),
+          tittle: "我的关注",
+        },
+      ],
+    };
   },
   computed: {
   },
   methods: {
-    // a(){},
-    getLogin(){
-
-      let params = {
-        custId:'1111',
-        bussData:{
-          identityType: "PASSWD",
-          authToken: "0xa89981988ba"
-        }
-      }
-      Login(params).then(res=>{
-         console.log(res,333333)
-      })
-    },
     goCreate() {
       this.$router.push('/Create')
     },
@@ -445,10 +461,10 @@ export default {
   display: none;
 }
 .vertical-center-modal{
-    width: 755px;
-    height: 353px;
-    flex-shrink: 0;
-    border-radius: 6px;
+  width: 755px;
+  height: 353px;
+  flex-shrink: 0;
+  border-radius: 6px;
 }
 
 
