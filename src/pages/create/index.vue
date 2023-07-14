@@ -49,10 +49,6 @@
           <Select>
           </Select>
         </FormItem>
-        <FormItem>
-          <Button type="primary">Submit</Button>
-          <Button style="margin-left: 8px">Cancel</Button>
-        </FormItem>
       </Form>
       <div class="create-right-bottom">
         <Button @click="goSeeNode">查看节点视图</Button>
