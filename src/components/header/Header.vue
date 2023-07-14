@@ -28,6 +28,7 @@
           <li>
             <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
           </li>
+<!--           这是登录-->
           <!-- <li>
             <Button @click="loginVisible = true" class="detail-button">Log in</Button>
           </li> -->
