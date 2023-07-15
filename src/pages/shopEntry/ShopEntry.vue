@@ -3,22 +3,22 @@
     <div class="upload-content">
       <div class="upload-content-item">
         <img v-if="current >= 0" src="@/assets/images/emc/Ellipse 8.png"/>
-        <span>编辑模板信息</span>
+        <span>EDIT MODEL BASE INFO</span>
       </div>
       <div class="upload-content-item">
         <img v-if="current >= 1" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
-        <span>编辑版本信息</span>
+        <span>EDIT MODEL DETAIL</span>
       </div>
       <div class="upload-content-item">
         <img v-if="current >= 2" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
-        <span>上传模型</span>
+        <span>UPLOAD MODEL</span>
       </div>
       <div class="upload-content-item">
         <img v-if="current >= 3" src="@/assets/images/emc/Ellipse 8.png"/>
         <img v-else src="@/assets/images/emc/Ellipse8.png"/>
-        <span>发布模型</span>
+        <span>PUBLISH MODEL</span>
       </div>
       <!--      <Button style="margin-top:16px" type="primary" @click="next">Next step</Button>-->
     </div>
