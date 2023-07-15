@@ -80,7 +80,7 @@ function queryByCategory1(category){
     });
 }
 
-function addModelBaseInfo(formModel) {
+export function addModelBaseInfo(formModel) {
     return request({
         url: '/queryModelInfoByCategory1.do',
         method: 'POST',

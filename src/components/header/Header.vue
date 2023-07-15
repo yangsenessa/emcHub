@@ -3,40 +3,28 @@
     <div class="box">
       <div class="nav">
         <div class="nav-div">
-          <img class="nav-img1" src="@/assets/images/logo-tittle.png"/>
-          <img class="nav-img2" src="@/assets/images/EMCHub.png"/>
+          <img class="nav-img1" src="@/assets/images/logo-tittle.png" />
+          <img class="nav-img2" src="@/assets/images/EMCHub.png" />
           <Input class="nav-input" placeholder="Enter text">
-            <Button slot="append">搜索</Button>
+          <Button slot="append">search</Button>
           </Input>
         </div>
         <ul class="detail">
           <li>
-            <img
-              @click="goCreate"
-              class="detail-create"
-              src="@/assets/images/Create.png"
-              alt=""
-            />
+            <img @click="goCreate" class="detail-create" src="@/assets/images/Create.png" alt="" />
           </li>
           <li>
-            <img
-              class="detail-connect"
-              src="@/assets/images/Connect.png"
-              alt=""
-            />
+            <img class="detail-connect" src="@/assets/images/Connect.png" alt="" />
           </li>
           <li>
-            <img class="detail-line" src="@/assets/images/Line1.png" alt=""/>
+            <img class="detail-line" src="@/assets/images/Line1.png" alt="" />
           </li>
-<!--           这是登录-->
-          <!-- <li>
+
+          <li>
             <Button @click="loginVisible = true" class="detail-button">Log in</Button>
-          </li> -->
+          </li>
           <li style="position: relative;cursor: pointer;" @click="Information">
-            <img
-              src="@/assets/images/Ellipse6.png"
-              class="nav-item nav-d"
-            />
+            <img src="@/assets/images/Ellipse6.png" class="nav-item nav-d" />
             <span class="detail-name">d</span>
           </li>
         </ul>
@@ -47,17 +35,12 @@
         <div class="box-name">
           <ul @click="goUser" style="cursor: pointer;">
             <li style="position: relative">
-              <img
-                src="@/assets/images/Ellipse6.png"
-                class="nav-item nav-d"
-                alt=""
-              />
+              <img src="@/assets/images/Ellipse6.png" class="nav-item nav-d" alt="" />
               <span class="detail-sigle-name">d</span>
             </li>
             <li><span class="box-Wave">WaveWSBS</span></li>
             <li>
-              <img class="box-Vector"
-                   src="@/assets/images/Vector.png" alt=""/>
+              <img class="box-Vector" src="@/assets/images/Vector.png" alt="" />
             </li>
           </ul>
         </div>
@@ -66,7 +49,7 @@
           <ul>
             <li v-for="item in myList" :key="item.id">
               <div class="box-num">{{ item.num }}</div>
-              <img class="box-img" :src="item.src" alt=""/>
+              <img class="box-img" :src="item.src" alt="" />
               <div class="box-tittle">{{ item.tittle }}</div>
             </li>
           </ul>
@@ -76,28 +59,80 @@
       </div>
     </Card>
 
-    <Modal  :styles="{top: '20vh'}" width="755px"
-            class-name="vertical-center-modal"
-            v-model="loginVisible" draggable :mask="true" :footer-hide="true">
+    <Modal :styles="{ top: '20vh' }" width="755px" class-name="vertical-center-modal" v-model="loginVisible" draggable
+      :mask="true" :footer-hide="true">
       <div class="modal-div">
-        <img class="modal-ing1" src="@/assets/images/logo-tittle.png"/>
-        <img class="modal-img2" src="@/assets/images/EMCHub.png"/>
+        <img class="modal-ing1" src="@/assets/images/logo-tittle.png" />
+        <img class="modal-img2" src="@/assets/images/EMCHub.png" />
+      </div>
+      <div class="modal-div">
+        <Form ref="ruleValidate" :model="userLoginInfo" label-position="top" :rules="ruleValidate">
+          <FormItem label="UserLogInId" prop="UserLogInId">
+            <Input v-model="userLoginInfo.custId"></Input>
+          </FormItem>
+          <FormItem label="AuthToken" prop="AuthToken">
+            <Input v-model="userLoginInfo.bussData.authToken"></Input>
+          </FormItem>
+        </Form>
       </div>
       <div class="modal-button-bottom">
         <Button @click="getLogin">
-          <img src="@/assets/images/emc/google.png" />
-          <span>使用google邮箱登陆</span>
+          <img src="@/assets/images/logo-tittle.png" />
+          <span>LOGIN</span>
         </Button>
       </div>
+      <div class="modal-button-bottom">
+        <Button @click="doReg">
+          <img src="@/assets/images/default.png" />
+          <span>New Registor</span>
+        </Button>
+      </div>
+      <div class="modal-button-bottom">
+        <Button @click="getLogin">
+          <img src="@/assets/images/logo-tittle.png" />
+          <span>IC-WAllET</span>
+        </Button>
+      </div>
+    </Modal>
+
+    <Modal :styles="{ top: '20vh' }" :body-style="bodystyle" width="755px" class-name="vertical-center-modal"
+      v-model="regVisible" draggable :mask="true" :footer-hide="true">
+      <div class="modal-div">
+        <img class="modal-ing1" src="@/assets/images/logo-tittle.png" />
+      </div>
+      <div class="modal-div">
+        <Form :model="userLoginInfo" label-position="top" :rules="ruleValidate">
+          <FormItem label="loginId" prop="LogInId">
+            <Input v-model="regInfoBussData.loginId"></Input>
+          </FormItem>
+          <FormItem label="email" prop="email">
+            <Input v-model="regInfoBussData.email"></Input>
+          </FormItem>
+          <FormItem label="mobilePhone" prop="mobilePhone">
+            <Input v-model="regInfoBussData.mobilePhone"></Input>
+          </FormItem>
+          <FormItem label="authToken" prop="authToken">
+            <Input v-model="authInfoData.bussData.authToken"></Input>
+          </FormItem>
+        </Form>
+      </div>
+
+      <div class="modal-button-bottom">
+        <Button @click="commitReg">
+          <img src="@/assets/images/logo-tittle.png" />
+          <span>commit</span>
+        </Button>
+      </div>
+
     </Modal>
   </div>
 </template>
 
 <script>
 import storage from "@/plugins/storage.js";
-import {logout} from "@/api/account.js";
-import {Login} from "@/api/login";
-import {modelUpload} from "../../api/login";
+import { logout } from "@/api/account.js";
+import { LoginByPassWD, userRegOrigin, authTokenSet } from "@/api/login";
+
 
 export default {
   name: "M-Header",
@@ -107,9 +142,47 @@ export default {
   data() {
     return {
       loginVisible: false,
+      regVisible: false,
       userInfo: {}, // 用户信息
+      userLoginInfo: {
+        custId: "",
+        bussData: {
+          identityType: "",
+          authToken: ""
+        }
+      },
+      regInfo: {
+        actionCode: 'register',
+
+        bussData: {
+          applRegInfo: ''
+        }
+      },
+      regInfoBussData: {
+        loginId: '',
+        email: '',
+        mobilePhone: '',
+        nickName: '',
+      },
+      authInfoData: {
+        actionCode: 'setToken',
+        custId: '',
+        bussData: {
+          identityType: 'PASSWD',
+          authToken: ''
+        }
+      },
       shoppingCart: [], // 购物车
       showInformation: false,
+      hasLogin: false,
+      ruleValidate: {
+        UserLogInId: [
+          { required: true, message: 'Please select the UserLogInId', trigger: 'blur' }
+        ],
+        AuthToken: [
+          { required: true, message: 'Please select the AuthToken', trigger: 'blur' }
+        ]
+      },
       myList: [
         {
           id: 1,
@@ -150,6 +223,49 @@ export default {
     goUser() {
       this.$router.push('PayDone');
     },
+    getLogin() {
+      LoginByPassWD(this.userLoginInfo).then(res => {
+        if (res.loginStatus === 'true') {
+          this.hasLogin = true;
+          alert("Login Success@");
+        } else {
+          alert("Login fail");
+        }
+
+      });
+
+    },
+    doReg() {
+      this.loginVisible = false;
+      this.regVisible = true;
+
+    },
+    commitReg() {
+      this.regInfo.bussData.applRegInfo = JSON.stringify(this.regInfoBussData);
+      userRegOrigin(this.regInfo).then(res => {
+        if (res.resultCode === 'SUCCESS') {
+          this.userInfo.userId = res.bussData.custId;
+          this.authInfoData.custId = res.bussData.custId;
+          this.setAuthToken();
+        } else {
+          alert("Register fail,please retry");
+        }
+      })
+    },
+    setAuthToken() {
+      authTokenSet(this.authInfoData).then(res => {
+        if (res.resultCode === 'SUCCESS') {
+          this.regVisible = false;
+          this.loginVisible = false;
+        } else {
+          alert("Register success!");
+
+          alert("Register fail,please retry");
+        }
+      })
+    }
+
+
   },
 };
 </script>
@@ -162,8 +278,7 @@ export default {
 .location,
 .first,
 .username,
-.shopping-cart-null span {
-}
+.shopping-cart-null span {}
 
 .box {
   width: 100%;
@@ -178,6 +293,8 @@ export default {
     height: 299px;
   }
 }
+
+
 
 .nav {
   margin: 0 auto;
@@ -223,6 +340,7 @@ export default {
       width: 430px;
       height: 43px;
       flex-shrink: 0;
+
       /deep/ .ivu-input {
         border-radius: 26px 0 0 26px;
         height: 36px;
@@ -334,6 +452,7 @@ export default {
   margin: 15px 9px 9px 5px;
   width: 276px;
   height: 240px;
+
   // background: #e5aeff;
   .box-name {
     height: 36px;
@@ -375,6 +494,7 @@ export default {
     margin: 30px 10px 27px 0px;
     height: 72px;
     width: 100%;
+
     // background: #dadce0;
     li {
       width: 48px;
@@ -415,11 +535,9 @@ export default {
     color: #fff;
     line-height: 37px;
     padding-left: 23px;
-    background: linear-gradient(
-        90deg,
+    background: linear-gradient(90deg,
         rgba(131, 79, 252, 0.8) 0%,
-        rgba(229, 174, 255, 0.8) 100%
-    );
+        rgba(229, 174, 255, 0.8) 100%);
   }
 
   .box-logout {
@@ -429,11 +547,9 @@ export default {
     color: #fff;
     line-height: 37px;
     padding-left: 23px;
-    background: linear-gradient(
-        90deg,
+    background: linear-gradient(90deg,
         rgba(131, 79, 252, 0.5) 0%,
-        rgba(229, 174, 255, 0.5) 100%
-    );
+        rgba(229, 174, 255, 0.5) 100%);
   }
 }
 
@@ -461,13 +577,20 @@ export default {
 /deep/ .ivu-modal-close {
   display: none;
 }
-.vertical-center-modal{
+
+.vertical-center-modal {
   width: 755px;
-  height: 353px;
+  height: 800px;
   flex-shrink: 0;
   border-radius: 6px;
+
 }
 
+.bodystyle {
+  height: 800px;
+  overflow: hidden;
+  overflowY: scroll;
+}
 
 .modal-div {
   display: flex;
@@ -497,18 +620,20 @@ export default {
 
   button {
     width: 656px;
-    height: 61px;
-    border-radius: 34px;
+    height: 30px;
+    border-radius: 14px;
     position: relative;
     background: linear-gradient(90deg, #834FFC 0%, #E5AEFF 100%);
-    img{
+
+    img {
       width: 30px;
       height: 30px;
       position: absolute;
       top: calc(50% - 15px);
       left: 189px;
     }
-    span{
+
+    span {
       color: #FFF;
       font-family: Montserrat;
       font-size: 24px;
