@@ -100,3 +100,18 @@ export function addModelBaseInfo(param) {
 }
 
 
+export function addModelDetailInfo(param) {
+
+    if(param.custId== null ){
+        param.custId='PUBLIC';
+
+    }
+    return request({
+        url: '/modModelDetailInfo.do',
+        method: 'POST',
+        data: param
+    });
+
+}
+
+

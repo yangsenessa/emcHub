@@ -1,27 +1,38 @@
 <template>
   <div class="upload-first-content">
     <Form ref="formValidateTwo"
-          :model="formValidate"
+          :model="formValidateTwo"
           label-position="top"
-          :rules="ruleValidate"
+          :rules="ruleValidateTwo"
     >
-      <FormItem label="版本编号" prop="version">
-        <Input v-model="formValidate.version"></Input>
+      <FormItem label="version code" prop="version">
+        <Input v-model="formValidateTwo.version"></Input>
       </FormItem>
-      <FormItem label="基础类型" prop="city">
-        <Select v-model="formValidate.city">
-        </Select>
+      <FormItem label="downloadLink" prop="downloadLink">
+        <Input v-model="formValidateTwo.downloadLink"></Input>
       </FormItem>
-      <FormItem label="搜索触发词" prop="version">
-        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
-        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
-        <Tag closable class="model-uploadFirst-tag">触发词</Tag>
-        <Input v-model="formValidate.version"/>
+      <FormItem label="guideLink" prop="guideLink">
+        <Input v-model="formValidateTwo.guideLink"></Input>
       </FormItem>
-      <FormItem label='版本说明' prop="desc">
-        <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
-        ></Input>
+      <FormItem label="paramsGuideLink" prop="paramsGuideLink">
+        <Input v-model="formValidateTwo.paramsGuideLink"></Input>
       </FormItem>
+      <FormItem label="sampleCodeLink" prop="sampleCodeLink">
+        <Input v-model="formValidateTwo.sampleCodeLink"></Input>
+      </FormItem>
+      <FormItem label="invokeGuide" prop="invokeGuide">
+        <Input v-model="formValidateTwo.invokeGuide" type="textarea"></Input>
+      </FormItem>
+      <FormItem label="positivePromts" prop="positivePromts">
+        <Input v-model="formValidateTwo.positivePromts" type="textarea"></Input>
+      </FormItem>
+      <FormItem label="negativePromts" prop="negativePromts">
+        <Input v-model="formValidateTwo.negativePromts" type="textarea"></Input>
+      </FormItem>
+      <FormItem label="commonParams" prop="commonParams">
+        <Input v-model="formValidateTwo.commonParams" type="textarea"></Input>
+      </FormItem>
+
       <FormItem style="display: flex;flex-direction: row;justify-content: center">
         <Button class="upload-content-xia"
                 @click="handleSubmit('formValidateTwo')"
@@ -41,50 +52,49 @@
 </template>
 
 <script>
-import {modModelDetailInfo} from "@/api/upload";
+import {addModelDetailInfo} from "@/api/modelinfo";
 
 export default {
   name: "uploadTwo",
   data() {
     return {
       agreeShow: false, // 控制点击
-      formValidate: {
-        version: "",
-        mail: '',
-        city: '',
-        gender: '',
-        interest: [],
-        date: '',
-        time: '',
-        desc: ''
+      formValidateTwo: {
+        modelId: this.model_id,
+        version: '',
+        downloadLink: '',
+        guideLink: '',
+        paramsGuideLink: '',
+        sampleCodeLink: '',
+        invokeGuide: '',
+        negativePromts: '',
+        positivePromts: '',
+        commonParams: ''
       },
-      ruleValidate: {
+      ruleValidateTwo: {
         version: [
           {required: true, message: 'The version cannot be empty', trigger: 'blur'}
         ],
-        mail: [
-          {required: true, message: 'Mailbox cannot be empty', trigger: 'blur'},
-          {type: 'email', message: 'Incorrect email format', trigger: 'blur'}
+        downloadLink: [
+          {required: true, message: 'Mailbox cannot be downloadLink', trigger: 'blur'},
         ],
-        city: [
-          {required: true, message: 'Please select the city', trigger: 'change'}
+        guideLink: [
+          {required: true, message: 'Please select the guideLink', trigger: 'change'}
         ],
-        gender: [
-          {required: true, message: 'Please select gender', trigger: 'change'}
+        paramsGuideLink: [
+          {required: true, message: 'Please select paramsGuideLink', trigger: 'change'}
         ],
-        interest: [
-          {required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change'},
-          {type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change'}
+        sampleCodeLink: [
+          {required: true, min: 1, message: 'Choose at least one sampleCodeLink', trigger: 'change'},
         ],
-        date: [
-          {required: true, type: 'date', message: 'Please select the date', trigger: 'change'}
+        invokeGuide: [
+          {required: true,  message: 'Please select the invokeGuide', trigger: 'change'}
         ],
-        time: [
-          {required: true, type: 'string', message: 'Please select time', trigger: 'change'}
+        positivePromts: [
+          {required: true, message: 'Please select time', trigger: 'change'}
         ],
-        desc: [
-          {required: true, message: 'Please enter a personal introduction', trigger: 'blur'},
-          {type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur'}
+        commonParams: [
+          {required: true, message: 'Please enter a commonParams', trigger: 'blur'},
         ]
       }
     }
@@ -99,25 +109,24 @@ export default {
       let modelDetail = {
         // modelId: "77b35362-8914-420b-8648-51c221857d5d",
         modelId: this.model_id,
-        version: "0.01",
-        downloadLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
-        guideLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
-        paramsGuideLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
-        sampleCodeLink: "https://github.com/yangsenessa/mrchai/tree/emchubV0.0.1",
-        invokeGuide: "NOTICE:LET ME KNOW before you put this model on commercial usage. My twitter account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f,V3,Coda and V3.5 are recommended,especially CODA for first-time users.Hard to tell how many models used to merge.Check the example images to recognize this model's art styleFor more example images, just take a look at https://pixai.art",
-        negativePromts: "1 corneo_power, bedroom, cute face, detailed body, detailed face, (sharp_teeth:0.8), +_+, pink panties, kids panties, home white t-shirt <lyco:GoodHands-beta2:1.0>",
-        positivePromts: "blurry, ugly, bad anatomy, extra limbs, undersaturated, low resolution, disfigured, deformations, out of frame, amputee, bad proportions, extra limb, missing limbs, distortion, floating limbs, out of frame, poorly drawn face, poorly drawn hands, text, malformed, missing fingers, cropped, wrong colour of clothes, wrong fingers",
-        commonParams: "Steps: 85, Size: 576x1024, Seed: 3172589486, Model: darkSushiMixMix_225D, Sampler: DPM++ SDE Karras, CFG scale: 8, Model hash: cca17b08da, Variation seed: 741382554, Variation seed strength: 0.15",
+        version: this.formValidateTwo.version,
+        downloadLink: this.formValidateTwo.downloadLink,
+        guideLink: this.formValidateTwo.guideLink,
+        paramsGuideLink:this.formValidateTwo.paramsGuideLink,
+        sampleCodeLink: this.formValidateTwo.sampleCodeLink,
+        invokeGuide: this.formValidateTwo.invokeGuide,
+        negativePromts: this.formValidateTwo.negativePromts,
+        positivePromts: this.formValidateTwo.positivePromts,
+        commonParams: this.formValidateTwo.commonParams
       }
       let params = {
-        "custId": "1111",
         "bussData": {
           modelDetail: JSON.stringify(modelDetail)
         }
       }
       this.$refs[name].validate((valid) => {
         if (valid) {
-          modModelDetailInfo(params).then(res => {
+          addModelDetailInfo(params).then(res => {
             if (res.resultCode === 'SUCCESS') {
               this.currentAdd(1)
             }
