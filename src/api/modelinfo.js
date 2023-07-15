@@ -92,7 +92,6 @@ export function addModelBaseInfo(formModel) {
                 "category1":category
             }
         }
-
     });
 
 }
