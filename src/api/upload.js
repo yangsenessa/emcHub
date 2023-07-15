@@ -7,9 +7,6 @@ export function modelUpload(params) {
     url: '/modelUpload.do',
     method: 'POST',
     data: params,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
   })
 }
 /**

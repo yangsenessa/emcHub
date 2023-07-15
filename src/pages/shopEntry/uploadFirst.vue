@@ -64,6 +64,7 @@
             <span>share with principle</span>
           </Radio>
         </RadioGroup>
+
 <!--        <div v-for="(item,index) in modelUseDetail" :key="index">-->
 <!--          <div style="display: flex;flex-direction: row">-->
 <!--            <div class="model-use-daGou"-->
@@ -87,7 +88,7 @@
 <!--          ></div>-->
 <!--          <span class="model-zi">共享此模型的文件</span>-->
 <!--        </div>-->
-      </FormItem>
+<!--      </FormItem>-->
       <FormItem style="text-align: center">
         <Button  class="upload-content-xia"
                  @click="handleSubmit('formValidateFirst')">Next</Button>
@@ -144,9 +145,15 @@ export default {
     }
   },
   props:{
+    firstParams:{type:Object,require: true},
     currentAdd: {type: Function, require: true},
   },
   watch:{
+  },
+  created() {
+    if(this.firstParams){
+      this.formValidate=JSON.parse(this.firstParams.bussData.modelInfo)
+    }
   },
   methods: {
     handleSubmit(name){
@@ -167,13 +174,13 @@ export default {
           const data = await addModelBaseInfo(params);
           if (data['resultCode'] === 'SUCCESS') {
             this.$emit("uploadFirstModelId", data.bussData.model_id);
+            this.$emit('uploadFirstModelParams',params)
             this.currentAdd(1)
           }else {
             this.$Message.error(res['resultCode'])
           }
         }
       })
-      // this.currentAdd(1)
     },
     labelClick(value){
       this.formValidate.cateGory1=value

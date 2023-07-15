@@ -103,7 +103,14 @@ export default {
   props: {
     currentAdd: {type: Function, require: true},
     currentSub: {type: Function, require: true},
-    model_id: {type: String, require: true}
+    model_id: {type: String, require: true},
+    twoParams:{type:Object,require:true}
+  },
+  created() {
+    if(this.twoParams){
+      console.log(this.twoParams)
+      alert(1111)
+    }
   },
   methods: {
     handleSubmit(name) {
@@ -130,6 +137,7 @@ export default {
           addModelDetailInfo(params).then(res => {
             if (res.resultCode === 'SUCCESS') {
               this.currentAdd(1)
+              this.$emit('uploadTwoModalParams',params)
             }
           })
         }
