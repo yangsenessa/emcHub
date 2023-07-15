@@ -51,15 +51,15 @@
         <Input v-model="formValidate.ModelDescribe" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
                ></Input>
       </FormItem>
-      <FormItem label="关于模型的使用" prop="ModelUse">
-        <RadioGroup v-model="formValidate.ModelUse" vertical>
-          <Radio label="apple">
-            <span>使用时注册出处</span>
-          </Radio>
-          <Radio label="android">
-            <span>共享此模型的文件</span>
-          </Radio>
-        </RadioGroup>
+<!--      <FormItem label="关于模型的使用" prop="ModelUse">-->
+<!--        <RadioGroup v-model="formValidate.ModelUse" vertical>-->
+<!--          <Radio label="apple">-->
+<!--            <span>使用时注册出处</span>-->
+<!--          </Radio>-->
+<!--          <Radio label="android">-->
+<!--            <span>共享此模型的文件</span>-->
+<!--          </Radio>-->
+<!--        </RadioGroup>-->
 <!--        <div v-for="(item,index) in modelUseDetail" :key="index">-->
 <!--          <div style="display: flex;flex-direction: row">-->
 <!--            <div class="model-use-daGou"-->
@@ -83,7 +83,7 @@
 <!--          ></div>-->
 <!--          <span class="model-zi">共享此模型的文件</span>-->
 <!--        </div>-->
-      </FormItem>
+<!--      </FormItem>-->
       <FormItem style="text-align: center">
         <Button  class="upload-content-xia"
                  @click="handleSubmit('formValidateFirst')">下一步</Button>
@@ -140,9 +140,15 @@ export default {
     }
   },
   props:{
+    firstParams:{type:Object,require: true},
     currentAdd: {type: Function, require: true},
   },
   watch:{
+  },
+  created() {
+    if(this.firstParams){
+      this.formValidate=JSON.parse(this.firstParams.bussData.modelInfo)
+    }
   },
   methods: {
     handleSubmit(name){
@@ -164,13 +170,13 @@ export default {
           const data = await addNewModel(params);
           if (data['resultCode'] === 'SUCCESS') {
             this.$emit("uploadFirstModelId", data.bussData.model_id);
+            this.$emit('uploadFirstModelParams',params)
             this.currentAdd(1)
           }else {
             this.$Message.error(res['resultCode'])
           }
         }
       })
-      // this.currentAdd(1)
     },
     labelClick(value){
       this.formValidate.cateGory1=value
