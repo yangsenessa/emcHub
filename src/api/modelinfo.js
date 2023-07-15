@@ -80,18 +80,21 @@ function queryByCategory1(category){
     });
 }
 
-export function addModelBaseInfo(formModel) {
+/**
+ * addmodel-baseInfo
+ * @param {*} param 
+ * @returns 
+ */
+export function addModelBaseInfo(param) {
+
+    if(param.custId== null ){
+        param.custId='PUBLIC';
+
+    }
     return request({
-        url: '/queryModelInfoByCategory1.do',
+        url: '/addNewModel.do',
         method: 'POST',
-        data: {
-            "custId": "1685969357974",
-            "bussData": {
-                "pageIndex": 0,
-                "pageSize": 10,
-                "category1":category
-            }
-        }
+        data: param
     });
 
 }

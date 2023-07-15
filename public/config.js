@@ -9,9 +9,9 @@ var BASE = {
   },
    */
   API_DEV: {
-    emchub: "/mrchaiemc",
+    emchub: "http://localhost:8081/mrchaiemc",
   },
   API_PROD: {
-    emchub: "/mrchaiemc",
+    emchub: "http://localhost:8081/mrchaiemc",
   },
 };

@@ -6,35 +6,39 @@
           :rules="ruleValidate"
     >
       <FormItem label="ModelName" prop="ModelName">
-        <Input v-model="formValidate.ModelName"></Input>
+        <Input v-model="formValidate.modelName"></Input>
       </FormItem>
       <FormItem label="ModelSubName" prop="ModelSubName">
-        <Input v-model="formValidate.ModelSubName">
+        <Input v-model="formValidate.modelSubName">
         </Input>
       </FormItem>
-      <FormItem   label="Category" prop="cateGory2">
+      <FormItem   label="Tag" prop="cateGory2">
         <Button closable class="model-uploadFirst-tag"
-             @click="()=>this.formValidate.cateGory2='PERSON'"
+             @click="()=>this.formValidate.cateGory2+='PERSON'+ ','"
         >PERSON</Button>
         <Button closable class="model-uploadFirst-tag"
-                @click="()=>this.formValidate.cateGory2='WEDDING'"
+                @click="()=>this.formValidate.cateGory2+='WEDDING'+ ','"
         >WEDDING</Button>
         <Button closable class="model-uploadFirst-tag"
-                @click="()=>this.formValidate.cateGory2='WOMEN'"
+                @click="()=>this.formValidate.cateGory2+='WOMEN'+ ','"
         >WOMEN</Button>
         <Button closable class="model-uploadFirst-tag"
-                @click="()=>this.formValidate.cateGory2='PHOTOREALISTIC'"
+                @click="()=>this.formValidate.cateGory2+='PHOTOREALISTIC'+ ','"
         >PHOTOREALISTIC</Button>
         <Button closable class="model-uploadFirst-tag"
-                @click="()=>this.formValidate.cateGory2='HIGHLY DETAILED'"
+                @click="()=>this.formValidate.cateGory2+='HIGHLY DETAILED'+ ','"
         >HIGHLY DETAILED</Button>
-        <Select v-model="formValidate.cateGory2"  clearable>
+       <!--<Select v-model="formValidate.cateGory2"  clearable>
           <Option v-for="item in categoryList"
                   :value="item.value"
                   :key="item.value">{{ item.label }}</Option>
-        </Select>
+        </Select>--> 
+        <FormItem label="ModelSubName" prop="ModelSubName">
+        <Input v-model="formValidate.cateGory2">
+        </Input>
       </FormItem>
-      <FormItem   label="Lable" prop="cateGory1">
+      </FormItem>
+      <FormItem   label="Category" prop="cateGory1">
         <template v-for="item in labelList">
           <Button class="model-uploadFirst-tag"
                   @click='labelClick(item.value)'
@@ -51,13 +55,13 @@
         <Input v-model="formValidate.ModelDescribe" type="textarea" :autosize="{minRows: 5,maxRows: 10}"
                ></Input>
       </FormItem>
-      <FormItem label="关于模型的使用" prop="ModelUse">
+      <FormItem label="How to use" prop="ModelUse">
         <RadioGroup v-model="formValidate.ModelUse" vertical>
-          <Radio label="apple">
-            <span>使用时注册出处</span>
+          <Radio label="public to eveyone">
+            <span>public to eveyone</span>
           </Radio>
-          <Radio label="android">
-            <span>共享此模型的文件</span>
+          <Radio label="share with principle">
+            <span>share with principle</span>
           </Radio>
         </RadioGroup>
 <!--        <div v-for="(item,index) in modelUseDetail" :key="index">-->
@@ -86,14 +90,14 @@
       </FormItem>
       <FormItem style="text-align: center">
         <Button  class="upload-content-xia"
-                 @click="handleSubmit('formValidateFirst')">下一步</Button>
+                 @click="handleSubmit('formValidateFirst')">Next</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 
 <script>
-import {addNewModel} from "@/api/upload";
+import {addModelBaseInfo} from "@/api/modelinfo";
 export default {
   name: "uploadFirst",
   data() {
@@ -102,18 +106,18 @@ export default {
       agreeShow: false, // 控制点击
       agreeShowTwo:true,
       formValidate: {
-        ModelName: '',
-        ModelSubName: '',
+        modelName: '',
+        modelSubName: '',
         cateGory2: '',
         cateGory1:'',
-        ModelDescribe:''
+        modelDescribe:''
       },
       vertical: 'apple',
-      ruleValidate: {
-        ModelName:[
+      formValidate: {
+        modelName:[
           {required: true, message: 'Please input the ModelName', trigger: 'blur'}
         ],
-        ModelSubName:[
+        modelSubName:[
           {required: true, message: 'Please input the ModelSubName', trigger: 'blur'}
         ],
         cateGory2: [
@@ -155,13 +159,12 @@ export default {
       this.$refs[name].validate(async(valid) => {
         if (valid) {
           let params = {
-            custId: "1111",
             bussData: {
               // modelInfo: JSON.stringify(modelInfo)
               modelInfo: JSON.stringify(this.formValidate)
             },
           };
-          const data = await addNewModel(params);
+          const data = await addModelBaseInfo(params);
           if (data['resultCode'] === 'SUCCESS') {
             this.$emit("uploadFirstModelId", data.bussData.model_id);
             this.currentAdd(1)
