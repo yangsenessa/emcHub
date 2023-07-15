@@ -32,6 +32,13 @@
       <FormItem label="commonParams" prop="commonParams">
         <Input v-model="formValidateTwo.commonParams" type="textarea"></Input>
       </FormItem>
+      <Button
+          class="upload-content-xia"
+          style="margin-left: 30px"
+          @click="up"
+        >上一步
+        </Button
+        >
 
       <FormItem style="display: flex;flex-direction: row;justify-content: center">
         <Button class="upload-content-xia"
@@ -39,13 +46,7 @@
         >下一步
         </Button
         >
-        <Button
-          class="upload-content-xia"
-          style="margin-left: 30px"
-          @click="up"
-        >上一步
-        </Button
-        >
+       
       </FormItem>
     </Form>
   </div>
