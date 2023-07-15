@@ -22,6 +22,12 @@
         <Button closable class="model-uploadFirst-tag"
                 @click="()=>this.formValidate.cateGory2='WOMEN'"
         >WOMEN</Button>
+        <Button closable class="model-uploadFirst-tag"
+                @click="()=>this.formValidate.cateGory2='PHOTOREALISTIC'"
+        >PHOTOREALISTIC</Button>
+        <Button closable class="model-uploadFirst-tag"
+                @click="()=>this.formValidate.cateGory2='HIGHLY DETAILED'"
+        >HIGHLY DETAILED</Button>
         <Select v-model="formValidate.cateGory2"  clearable>
           <Option v-for="item in categoryList"
                   :value="item.value"
@@ -105,22 +111,25 @@ export default {
       vertical: 'apple',
       ruleValidate: {
         ModelName:[
-          {required: true, message: 'Please select the ModelName', trigger: 'blur'}
+          {required: true, message: 'Please input the ModelName', trigger: 'blur'}
         ],
         ModelSubName:[
-          {required: true, message: 'Please select the ModelSubName', trigger: 'blur'}
+          {required: true, message: 'Please input the ModelSubName', trigger: 'blur'}
         ],
         cateGory2: [
-          {required: true, message: 'Please select the cateGory', trigger: 'change'}
+          {required: true, message: 'Please input the cateGory', trigger: 'change'}
         ],
         cateGory1: [
-          {required: true, message: 'Please select the Label', trigger: 'change'}
+          {required: true, message: 'Please input the Label', trigger: 'change'}
         ],
       },
       categoryList:[
         {value:'PERSON',label:'PERSON'},
         {value:'WEDDING',label:'WEDDING'},
         {value:'WOMEN',label:'WOMEN'},
+        {value:'PHOTOREALISTIC',label:'PHOTOREALISTIC'},
+        {value:'HIGHLY DETAILED',label:'HIGHLY DETAILED'}
+
       ],
       labelList:[
         {value:'CHECKPOINT',label:'Checkpoint'},
@@ -291,7 +300,7 @@ export default {
 .model-uploadFirst-tag{
   border-radius: 6px;
   background: #BF61F9;
-  width: 80px;
+  width: 140px;
   height: 36px;
   flex-shrink: 0;
 
