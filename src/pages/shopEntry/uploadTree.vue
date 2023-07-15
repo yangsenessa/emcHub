@@ -13,17 +13,30 @@
     <!--            action="#">-->
     <!--      <img src="@/assets/images/emc/Vector.png"/>-->
     <!--    </Upload>-->
-    <Upload class="model-upload-three-upload"
-            :before-upload="handleUpload"
-            multiple
-            type="drag"
-            :format="['ckpt','pt','safetensors','bin','zip']"
-            action="#">
+    <!--    <Upload class="model-upload-three-upload"-->
+    <!--            :before-upload="handleUpload"-->
+    <!--            multiple-->
+    <!--            type="drag"-->
+    <!--            :format="['ckpt','pt','safetensors','bin','zip']"-->
+    <!--            action="#">-->
+    <!--      <img src="@/assets/images/emc/Vector.png"/>-->
+    <!--    </Upload>-->
+    <!--      :format="['ckpt','pt','safetensors','bin','jpt']"-->
+    <Upload
+      class="model-upload-three-upload"
+      ref="upload"
+      :show-upload-list="false"
+      :on-success="handleSuccess"
+      :max-size="10240"
+      :format="['ckpt','pt','safetensors','bin','zip']"
+      :on-format-error="handleFormatError"
+      :on-exceeded-size="handleMaxSize"
+      :before-upload="handleBeforeUpload"
+      multiple
+      type="drag"
+      action="https://6006s04c14.zicp.fun:443/mrchaiemc/fileUpload.do">
       <img src="@/assets/images/emc/Vector.png"/>
     </Upload>
-    <div v-if="file !== null">
-      Upload file: {{ file.name }}
-    </div>
     <span class="model-upload-three-span">最多添加5个文件，支持ckpt、pt、safetensors、bin、zip文件</span>
     <span class="model-upload-three-oldUpload">已上传</span>
     <div class="model-upload-three-bottom">
@@ -61,39 +74,71 @@ export default {
   data() {
     return {
       uploadAction: '',
-      file: null
+      uid:null,
+      fileIdList:[]
     }
   },
   props: {
-    currentAdd: {type: Function, require: true},
+    model_id:{type:String,require:true},
     currentSub: {type: Function, require: true},
-    // model_id: {type: String, require: true}
+    currentAdd: {type: Function, require: true},
   },
   methods: {
-    handleSubmit() {
-      let params = {
-        modelDetail: {
-          modelId: "b20db117-e130-413a-ae92-059e49839cb9",
-          version: "111",
-          guideLink: "guideLink",
-          paramsGuideLink: "paramsGuideLink",
-          sampleCodeLink: "sampleCodeLink"
-        },
-        file: this.file,
-        userId: '111'
+    handleSuccess (res, file) {
+      console.log(file,555555555)
+      this.fileIdList.push(file.response.bussData.file_link)
+      this.$Message.success(`upload${file.response.resultCode}`)
+    },
+    handleFormatError (file) {
+      this.$Message.error("非'ckpt'||'pt'||'safetensors'||'bin'||'zip'格式的文件，请重111新选择！");
+      return false;
+    },
+    handleMaxSize (file) {
+      this.$Notice.warning({
+        title: 'Exceeding file size limit',
+        desc: 'File  ' + file.name + ' is too large, no more than 10M.'
+      });
+    },
+    handleBeforeUpload (file) {
+      let fileName = file.name;
+      let suffix = fileName.substr(fileName.lastIndexOf('.'));
+      if (suffix != '.ckpt' &&suffix != '.pt'&&suffix != '.safetensors'&&suffix != '.bin'&&suffix != '.zip') {
+        this.$Message.error('非ckpt,pt,safetensors,zip格式的文件，请重新选择！');
+        return false;
       }
+    },
+    handleSubmit() {
+      // if(!this.fileId){
+      //   return this.$Message.warning('upload please')
+      // }
+      // this.currentAdd(1)
+      let modelDateil={
+        // modelId:this.model_id
+        modelId: "b20db117-e130-413a-ae92-059e49839cb9",
+        version: "111",
+        guideLink: null,
+        paramsGuideLink: null,
+        sampleCodeLink: null,
+        downloadLink:'f7060ed7-dfef-490f-bed7-54c3f71ff615',
+        // downloadLink:this.fileIdList,
+      }
+      let params = {
+        bussData:{
+          modeldateil:JSON.stringify(modelDateil)
+        },
+        userId: '111',
+      }
+      console.log(params,5555555)
       modelUpload(params).then(res => {
         console.log(res, 44444444)
-        // if(res)
+          if (data['resultCode'] === 'SUCCESS') {
+            this.currentAdd(1)
+          }
       })
       this.currentAdd(1)
     },
     up(){
       this.currentSub(1)
-    },
-    handleUpload(file) {
-      this.file = file
-      return false;
     },
   }
 

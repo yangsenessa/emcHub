@@ -26,18 +26,24 @@
       v-if="current === 0"
       :currentAdd="currentAdd"
       @uploadFirstModelId="uploadFirstModelId"
+      @uploadFirstModelParams="uploadFirstModelParams"
+      :firstParams="firstParams"
     />
     <uploadTwo v-if="current === 1"
                :model_id="model_id"
+               :twoParams="twoParams"
+               @uploadTwoModalParams="uploadTwoModalParams"
                :currentSub="currentSub"
                :currentAdd="currentAdd"
     />
     <uploadTree v-if="current === 2"
                 :currentSub="currentSub"
                 :currentAdd="currentAdd"
+                :model_id="model_id"
     />
     <uploadFour v-if="current === 3"
                 :currentSub="currentSub"
+                :model_id="model_id"
     />
   </div>
 </template>
@@ -53,6 +59,8 @@ export default {
     return {
       current: 0,
       model_id: null,
+      firstParams:null,
+      twoParams:null
     };
   },
   components: {
@@ -62,6 +70,13 @@ export default {
     uploadFour,
   },
   methods: {
+    uploadFirstModelParams(val){
+      this.firstParams=val
+    },
+    // 第二步保存的值
+    uploadTwoModalParams(val){
+      this.twoParams=val
+    },
     uploadFirstModelId(id) {
       console.log(id,'id')
       this.model_id = id
