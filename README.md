@@ -11,19 +11,21 @@ The Base Info -- weak
 
 req:
 {
-    "loginId": "1111",
+    "loginId": "yangsenessa1",
 	  "bussData": {
 		    "identityType": "PASSWD",
-		    "authToken": "0xa89981988ba"
+		    "authToken": "123456"
 	}
 }
+
 
 res:
 {
     "resultCode": "SUCCESS",
+    "gmtDate": 1689694933269,
     "loginStatus": "true",
     "bussData": {
-        "custId": "00001"
+        "custId": "1685969357974"
     }
 }
 
@@ -32,21 +34,25 @@ NOTE：if resultCode == NEED_LOGONIN, route to /login
 #### applyRegister.do
 req:
 {
-    "actionCode": "register",
-	  "bussData": {
-		    "loginId":"",
-        "email":"",
-        "mobilePhoneNo":"",
-        "nickName":""        
+    "bussData": {
+	"loginId":"essa2",
+        "email":"essa2",
+        "mobilePhoneNo":"11111",
+        "nickName":"essa2"        
 	}
 }
+
 
 
 rsp:
 {
     "resultCode": "SUCCESS",
+    "gmtDate": 1689695950011,
+    "loginStatus": "true",
     "bussData": {
-        "custId": "00001"
+        "loginId": "essa2",
+        "nickName": "essa2",
+        "custId": "1691659228910"
     }
 }
 
@@ -73,7 +79,7 @@ res:
 req:
 
 {
-    "custId":"1685969357974",
+    "custId":"1691659228910",
     "bussData" :{
        "modelName":"",
        "modelSubName":"",
@@ -86,8 +92,10 @@ req:
 res:
 {
     "resultCode": "SUCCESS",
-    "bussData":{
-        "modelId":""
+    "gmtDate": 1689698194374,
+    "loginStatus": "true",
+    "bussData": {
+        "model_id": "c0684661-5c2a-40e2-8e55-998334e4822e"
     }
 }
 
@@ -137,8 +145,7 @@ res：
 {
     "resultCode": "SUCCESS",
      "totalNum":10，     
-     "bussData": {
-        "modelList": [{
+     "modelList":[{
               "modelName":"",
               "modelSubName":"",
               "category1":"",
@@ -148,7 +155,8 @@ res：
         },
         {
            ...
-        }]     
+        }] 
+           
 }
 
 ### queryModelDetailInfo.do
@@ -165,22 +173,32 @@ req:
 res:
 
 {
-     "resultCode": "SUCCESS",
-     "bussData": {
-         "modelId":"",
-         "version":"",
-         "guideLink":"",
-         "paramsGuideLink":"",
-         "sampleCodeLink":"",
-         "invokeGuide":"",
-         "positivePromts":"",
-         "negativePrompt":"",
-         "enhancePromt":"",
-         "numInferenceSteps":""
-         "seed":"",
-         "modelFileLink": "",
-         "sampleImgFileLink":""
-     }
+    "resultCode": "SUCCESS",
+    "gmtDate": 1689705453613,
+    "loginStatus": "true",
+    "totalNum": 0,
+    "modelInfoList": [],
+    "bussData": {
+        "modelFileLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+        "cateGory1": "new1",
+        "negativePromts": "\"aaa\"",
+        "cateGory3": "new1",
+        "seed": "2",
+        "cateGory2": "new1",
+        "modelId": "c0684661-5c2a-40e2-8e55-998334e4822e",
+        "sampleImgFileLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+        "paramsGuideLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+        "version": "0.0.1",
+        "guideLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+        "modelName": "new1",
+        "positivePromts": "\"aaa\"",
+        "modelSubName": "new1",
+        "numInferenceSteps": "2",
+        "invokeGuide": "account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f",
+        "modelDesc": "account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f",
+        "enhancePromts": "aaa",
+        "sampleCodeLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md"
+    }
 }
 
 
