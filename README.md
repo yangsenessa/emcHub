@@ -103,19 +103,13 @@ res:
 {
      "custId": "1111",
      "busssData":{
-         "modelId":"",
-         "version":"",
-         "guideLink":"",
-         "paramsGuideLink":"",
-         "sampleCodeLink":"",
-         "invokeGuide":"",
-         "positivePromts":"",
-         "negativePrompt":"",
-         "enhancePromt":"",
-         "numInferenceSteps":""
-         "seed":"",
-         "modelFileLink": "",
-         "sampleImgFileLink":""
+         "modelId":"",   //not null
+         "version":"",   //not null
+	 "modelFileNames",//noe null
+         "modelFileLinks": "",  //not null
+         "sampleImgFileLinks":"" , //null
+	 "modelFileHashCodes""", //split by ',' and matchs strickly with fileName sequence
+	 ...                     //you can add key as your need
      }
 }
 res:
@@ -165,7 +159,8 @@ req:
 {
     "custId":"1111",
     "bussData": {
-        "model_id":"77b35362-8914-420b-8648-51c221857d5d"
+        "modelId":"77b35362-8914-420b-8648-51c221857d5d",
+	"version":""
     }
 
 }
@@ -179,26 +174,30 @@ res:
     "totalNum": 0,
     "modelInfoList": [],
     "bussData": {
-        "modelFileLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
-        "cateGory1": "new1",
-        "negativePromts": "\"aaa\"",
-        "cateGory3": "new1",
-        "seed": "2",
-        "cateGory2": "new1",
-        "modelId": "c0684661-5c2a-40e2-8e55-998334e4822e",
-        "sampleImgFileLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
-        "paramsGuideLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+        "modelFileLinks": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
+	"modelFileNames":"", //split by ','
+        "sampleImgFileLinks": "https://github.com/yangsenessa/emcHub/edit/main/README.md", //split by ',' and matchs strickly with fileName sequence
+	"modelFileHashCodes""", //split by ',' and matchs strickly with fileName sequence
         "version": "0.0.1",
-        "guideLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md",
-        "modelName": "new1",
-        "positivePromts": "\"aaa\"",
-        "modelSubName": "new1",
-        "numInferenceSteps": "2",
-        "invokeGuide": "account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f",
-        "modelDesc": "account:@eagelaxis :) Contact me if needed.Discord Account:Eagelaxis#7818Version Choosing Advice:V2f",
-        "enhancePromts": "aaa",
-        "sampleCodeLink": "https://github.com/yangsenessa/emcHub/edit/main/README.md"
+	
+        ...     //extend key which you already upload 
     }
+}
+
+### queryModelInfoByModelFileHashCode.do
+req :{
+    "hashCode" :""
+}
+
+rsp: {
+      "resultCode": "SUCCESS",
+      bussData:{
+          "modelId":"",
+          "modelName":"",
+          "modelSubName":"",
+          "ownerCustId":"",
+          "ownerPrincipleId" :""
+      }
 }
 
 
