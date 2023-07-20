@@ -1,4 +1,42 @@
 # emcHub
+## MODEINFO
+
+modelId: 模型id,由系统生成
+
+modelName:模型名称
+
+modelSubName:模型二级名称，展示在grid形式模型名称下面的摘要描述
+
+ownerCustId:模型拥有者
+
+mannerCustID:模型审核者
+
+category1:模型已经分类:checkpoint,lora
+
+category2:模型style,如 BASEMODEL,PHOTORELISTIIC
+
+category3:检索预留
+
+
+## modeilDetailInfo
+
+以下为强字段，后面可以按需累加其他字段
+
+modelId： 模型名称
+
+version: 模型版本
+
+modelFileNames：模型文件名称，','分割
+
+modelFileLinks： 模型文件下载链接，‘，’分隔，严格按名称顺序匹配
+
+sampleImgFileLinks：模型样例图下载链接 ‘，’分隔，严格按名称顺序匹配
+
+modelFileHashCodes：模型短hash值， ‘，’分隔，严格按名称顺序匹配
+
+
+
+
 ## Inferface Issue
 The Base Info -- weak
 {
