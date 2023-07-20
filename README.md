@@ -263,6 +263,25 @@ res:
 
 }
 
+### mannerModelPublish.do
+req：
+{
+    "custId":"1111",
+    "bussData": {
+        "modelId":"77b35362-8914-420b-8648-51c221857d5d",
+	"reviewIssue":""
+    }
+
+}
+
+rsp:
+{
+      "resultCode": "SUCCESS",
+      "bussData":{
+      }
+
+}
+
 
 
 
