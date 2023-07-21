@@ -224,7 +224,7 @@ res:
 
 ### queryModelInfoByModelFileHashCode.do
 req :{
-    "hashCode" :""
+    "modelHashcode" :""
 }
 
 rsp: {
