@@ -263,21 +263,51 @@ res:
 
 }
 
-### mannerModelPublish.do
+### mannerModelPublish.do 模型审批
 req：
 {
     "custId":"1111",
     "bussData": {
         "modelId":"77b35362-8914-420b-8648-51c221857d5d",
+	"reviewResCode":"",           // ACCEPT/REFUSE
 	"reviewIssue":""
     }
 
 }
-
 rsp:
 {
       "resultCode": "SUCCESS",
       "bussData":{
+      }
+}
+
+### queryModelInfoByCustId.do   依据用户号查询模型基础信息
+req:
+{
+ "custId":"1111",
+    "bussData": {
+        "modelId":"77b35362-8914-420b-8648-51c221857d5d",
+	 "ownerCustId":"",
+	  pageIndex:0,
+          pageSize:10
+    }
+}
+
+rsp:
+{
+     "resultCode": "SUCCESS",
+      "modelList":[{
+              "modelName":"",
+              "modelSubName":"",
+              "category1":"",
+              "category2":"",
+              "category3":"",
+              "sampleImgFileLinks"
+        },
+        {
+           ...
+        }] ,
+	  "bussData": {
       }
 
 }
