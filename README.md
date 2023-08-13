@@ -508,6 +508,117 @@ rsp:
     "bussData": {}
 }
 
+### fuzzyRequest.do 模型模糊查询接口
+
+查询规则：
+
+titlePattern：文本信息模糊查询因子
+
+categroyPattern：分类信息模糊查询因子
+
+tagPattern：tag信息模糊查询因子
+
+modelStat：模型状态信息查询因子（非模糊查询）
+
+叠加规则：
+
+1、单因子查询
+
+2、titlePattern+categroyPattern+tagPattern 三个因子叠加混合查询
+
+
+req:
+
+{"custId":"1693572980159",
+
+    "titlePattern":"Dream",
+    "categroyPattern":"",
+    "tagPattern":"",
+    "modelStat":"",
+   "bussData" :{
+        "pageIndex":0,
+        "pageSize":10
+    }
+    
+}
+
+rsp:
+
+{
+    "resultCode": "SUCCESS",
+    "gmtDate": 1691935539415,
+    "loginStatus": "true",
+    "totalNum": 0,
+    "modelInfoList": [
+        {
+            "modelId": "1e0fa975-8fed-429b-a652-d568cef59fe1",
+            "modelName": "Dreamy Princess",
+            "modelSubName": "CHARACTER,GIRL,3D,CARTOON",
+            "ownerCustId": "1690844961565",
+            "mannerUserId": "1693572980159",
+            "modelKey": null,
+            "cateGory1": "CHECKPOINT",
+            "cateGory2": null,
+            "cateGory3": null,
+            "sampleImgFileLinks": null,
+            "modelStat": "PUBLISH"
+        },
+        {
+            "modelId": "2a15df2a-4581-44c3-af48-f040963c3dcc",
+            "modelName": "Children's Dream",
+            "modelSubName": "CONCEPT,ARCHITECTURE",
+            "ownerCustId": "1689313437488",
+            "mannerUserId": null,
+            "modelKey": null,
+            "cateGory1": "LORA",
+            "cateGory2": null,
+            "cateGory3": null,
+            "sampleImgFileLinks": null,
+            "modelStat": "SUBMIT"
+        },
+        {
+            "modelId": "4ab22a50-aa37-4b90-a91e-b9644e8df957",
+            "modelName": "DreamWeaver",
+            "modelSubName": "GIRL",
+            "ownerCustId": "1689332022379",
+            "mannerUserId": "1693572980159",
+            "modelKey": null,
+            "cateGory1": "LORA",
+            "cateGory2": null,
+            "cateGory3": null,
+            "sampleImgFileLinks": null,
+            "modelStat": "PUBLISH"
+        },
+        {
+            "modelId": "58813766-2323-4386-8187-cebcad6085f5",
+            "modelName": "Dream Weaver",
+            "modelSubName": "GIRL",
+            "ownerCustId": "1689313437488",
+            "mannerUserId": null,
+            "modelKey": null,
+            "cateGory1": "LORA",
+            "cateGory2": null,
+            "cateGory3": null,
+            "sampleImgFileLinks": null,
+            "modelStat": "SUBMIT"
+        },
+        {
+            "modelId": "8da0a8f7-434a-4eda-9555-0de319162521",
+            "modelName": "DreamSewer",
+            "modelSubName": "GIRL",
+            "ownerCustId": "1689313437488",
+            "mannerUserId": null,
+            "modelKey": null,
+            "cateGory1": "LORA",
+            "cateGory2": null,
+            "cateGory3": null,
+            "sampleImgFileLinks": null,
+            "modelStat": "SUBMIT"
+        }
+    ],
+    "bussData": {}
+}
+
 
 
 
